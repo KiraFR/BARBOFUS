@@ -1,0 +1,191 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------------------
+   Jetons de marque BARBOFUS
+   Repris tels quels de resources/css/app.css (site Laravel actuel).
+   Ce sont les valeurs brutes : on s'en sert pour les usages identitaires
+   (dégradés, cœurs, statuts). Pour tout le reste, préférer les jetons
+   sémantiques plus bas (bg-background, text-muted-foreground, ...).
+--------------------------------------------------------------------------- */
+@theme {
+  --color-anthracite: #292522;
+  --color-anthracite-lit: #332f2c;
+
+  --color-ivory: #fff5e9;
+  --color-ivory-dark: #f2e8dc;
+
+  --color-cawotte-dark: #e2510f;
+  --color-cawotte-lit: #ff891c;
+
+  --color-emerald-dark: #488911;
+  --color-emerald-lit: #e6ff00;
+
+  --color-gold-dark: #fba436;
+  --color-gold-lit: #faed61;
+  --color-gold-text: #fcb943;
+  --color-gold-text-lit: #fbe25b;
+
+  --color-heart-gray: #99928b;
+  --color-heart-dark: #b10f0f;
+  --color-heart-lit: #f33a3a;
+
+  --color-inactive: #8b847b;
+
+  --color-refused-bg: #483131;
+  --color-pending-bg: #4d4532;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ---------------------------------------------------------------------------
+   Jetons sémantiques (consommés par shadcn/ui).
+   BARBOFUS n'a qu'un seul thème, sombre : pas de bloc .dark, pas de bascule.
+   Le jour où un thème clair est voulu, il s'ajoute ici en `.light`.
+
+   Polices : "MADE Okin" et "MV Boli" ne sont PAS embarquées.
+   MADE Okin est sous licence « personal use » (cf. le nom des fichiers dans
+   public/storage/fonts du site Laravel) et MV Boli est une police système
+   Windows, absente ailleurs. Tant que ce point n'est pas tranché, la pile
+   retombe sur Geist, qui est propre. Les noms restent en tête de pile : le
+   jour où les fichiers sont ajoutés, tout se met en place sans rien changer.
+--------------------------------------------------------------------------- */
+:root {
+  --font-sans: "MADE Okin", var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: "MV Boli", var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --background: var(--color-anthracite);
+  --foreground: var(--color-ivory);
+
+  --card: var(--color-anthracite-lit);
+  --card-foreground: var(--color-ivory);
+  --popover: var(--color-anthracite-lit);
+  --popover-foreground: var(--color-ivory);
+
+  /* L'or est la couleur d'action du site. */
+  --primary: var(--color-gold-text);
+  --primary-foreground: var(--color-anthracite);
+
+  --secondary: var(--color-anthracite-lit);
+  --secondary-foreground: var(--color-ivory);
+
+  --muted: var(--color-anthracite-lit);
+  --muted-foreground: var(--color-inactive);
+
+  --accent: var(--color-cawotte-lit);
+  --accent-foreground: var(--color-anthracite);
+
+  --destructive: var(--color-heart-dark);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: var(--color-gold-text);
+
+  --chart-1: var(--color-gold-text);
+  --chart-2: var(--color-cawotte-lit);
+  --chart-3: var(--color-emerald-dark);
+  --chart-4: var(--color-heart-lit);
+  --chart-5: var(--color-inactive);
+
+  --radius: 0.625rem;
+
+  --sidebar: var(--color-anthracite-lit);
+  --sidebar-foreground: var(--color-ivory);
+  --sidebar-primary: var(--color-gold-text);
+  --sidebar-primary-foreground: var(--color-anthracite);
+  --sidebar-accent: var(--color-cawotte-lit);
+  --sidebar-accent-foreground: var(--color-anthracite);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: var(--color-gold-text);
+}
+
+/* Dégradés identitaires, portés depuis @layer utilities de app.css. */
+@utility cawotte-gradient {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-cawotte-dark) 0%,
+    var(--color-cawotte-lit) 100%
+  );
+}
+
+@utility emerald-gradient {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-emerald-dark) 0%,
+    var(--color-emerald-lit) 100%
+  );
+}
+
+@utility gold-gradient {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-gold-dark) 0%,
+    var(--color-gold-lit) 100%
+  );
+}
+
+@utility heart-gradient {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-heart-dark) 0%,
+    var(--color-heart-lit) 100%
+  );
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
