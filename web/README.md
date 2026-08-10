@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BARBOFUS — front
 
-## Getting Started
+Refonte du front de BARBOFUS en Next.js. L'application Laravel à la racine du
+dépôt n'est pas touchée : elle reste le site en production jusqu'à la bascule.
 
-First, run the development server:
+## Démarrer
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site tourne sur http://localhost:3000. La page http://localhost:3000/design
+affiche les jetons de design (couleurs, typographie, composants de base) — c'est
+une page de contrôle interne, non indexée, qui ne fait pas partie du site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Polices
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Les polices ne sont pas dans le dépôt. Sans elles le site reste parfaitement
+lisible (repli sur Geist), mais pour retrouver l'identité visuelle exacte :
 
-## Learn More
+```bash
+cp ../storage/app/public/fonts/* public/fonts/
+```
 
-To learn more about Next.js, take a look at the following resources:
+Elles sont exclues volontairement : `MADE Okin` est sous licence « personal
+use » et `MV Boli` est une police système Windows que sa licence n'autorise pas
+à rediffuser comme police web. Les servir depuis le serveur est une chose, les
+publier sur un dépôt public en est une autre. `MV Boli` devrait à terme être
+remplacée par une alternative libre.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Où sont les choses
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Chemin | Rôle |
+|---|---|
+| `src/types/api.ts` | Le contrat de données, calqué sur les modèles Laravel de `develop` |
+| `src/app/globals.css` | Polices, couleurs de marque, jetons sémantiques, dégradés |
+| `src/lib/fixtures/` | Données de démonstration, en attendant l'API |
+| `src/components/ui/` | Composants shadcn/ui — ne pas modifier à la main, ils se régénèrent |
+| `src/app/design/` | Page de contrôle des jetons de design |
 
-## Deploy on Vercel
+## Méthode
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Le front est construit d'abord, en statique, contre des données typées calquées
+sur les vraies tables. Ces types sont le contrat que l'API devra respecter le
+jour où elle sera branchée. Un écran est terminé avant qu'un autre soit commencé.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## À savoir
+
+- Next 16 : `params` et `searchParams` sont des promesses, `middleware` s'appelle
+  désormais `proxy`, et `next lint` n'existe plus (utiliser `npm run lint`).
+- Le site n'a qu'un seul thème, sombre. Pas de bascule clair/sombre.
+- Les images de skins sont pour l'instant des silhouettes générées à partir des
+  couleurs du skin (`SkinPlaceholder`), à supprimer quand l'API servira
+  `image_path`.

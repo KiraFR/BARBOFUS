@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# polices
+# Volontairement hors du dépôt, comme côté Laravel (/storage est ignoré) :
+# MADE Okin est sous licence « personal use » et MV Boli est une police
+# système Windows, non rediffusable. Les servir depuis le serveur est une
+# chose, les publier sur un dépôt public en est une autre.
+# Récupération : cp ../storage/app/public/fonts/* public/fonts/
+# Absentes, le site retombe sur Geist sans casser le build.
+/public/fonts

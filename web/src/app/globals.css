@@ -5,6 +5,51 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ---------------------------------------------------------------------------
+   Polices, portées depuis @layer base de resources/css/app.css.
+
+   Déclarées en @font-face plutôt qu'avec next/font/local, délibérément : les
+   fichiers sont hors du dépôt (voir .gitignore), et @font-face se contente de
+   retomber sur la police suivante quand un fichier manque, là où
+   next/font/local ferait échouer le build sur un clone frais.
+
+   Récupérer les fichiers : cp ../storage/app/public/fonts/* public/fonts/
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: "MADE Okin";
+  font-weight: 100;
+  font-display: swap;
+  src: url("/fonts/MADEOkineSansPERSONALUSE-Thin.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "MADE Okin";
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/MADEOkineSansPERSONALUSE-Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "MADE Okin";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/MADEOkineSansPERSONALUSE-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "MADE Okin";
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/MADEOkineSansPERSONALUSE-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "MV Boli";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/mvboli.ttf") format("truetype");
+}
+
+/* ---------------------------------------------------------------------------
    Jetons de marque BARBOFUS
    Repris tels quels de resources/css/app.css (site Laravel actuel).
    Ce sont les valeurs brutes : on s'en sert pour les usages identitaires
@@ -89,12 +134,10 @@
    BARBOFUS n'a qu'un seul thème, sombre : pas de bloc .dark, pas de bascule.
    Le jour où un thème clair est voulu, il s'ajoute ici en `.light`.
 
-   Polices : "MADE Okin" et "MV Boli" ne sont PAS embarquées.
-   MADE Okin est sous licence « personal use » (cf. le nom des fichiers dans
-   public/storage/fonts du site Laravel) et MV Boli est une police système
-   Windows, absente ailleurs. Tant que ce point n'est pas tranché, la pile
-   retombe sur Geist, qui est propre. Les noms restent en tête de pile : le
-   jour où les fichiers sont ajoutés, tout se met en place sans rien changer.
+   Polices : chargées depuis public/fonts, qui est hors du dépôt. Geist reste
+   en repli, donc un clone sans les fichiers reste parfaitement lisible.
+   MV Boli est une police système Windows dont la licence n'autorise pas la
+   rediffusion web : à remplacer un jour par une alternative libre.
 --------------------------------------------------------------------------- */
 :root {
   --font-sans: "MADE Okin", var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
