@@ -15,9 +15,13 @@ import type { SkinDetail } from "@/types/api";
  *     hypothèse d'école, c'est l'état normal des skins fraîchement postés ;
  *   - des noms d'items dépassent quarante caractères et déborderont de toute
  *     mise en page trop optimiste.
- * Beaucoup de skins n'ont par ailleurs aucun nom en production ; ceux-là ont
- * été écartés de cet échantillon pour qu'il reste lisible, mais le type
- * autorise `name: null` et la carte devra le gérer.
+ * Le premier de la liste (94882) est justement sans nom : c'est le cas le plus
+ * fréquent en production, il fallait qu'il soit représenté.
+ *
+ * Autre chose vue en passant : le skin 94816 a disparu entre deux requêtes à
+ * une demi-heure d'intervalle, et l'API a répondu un objet quasi vide plutôt
+ * qu'un 404. Rien à corriger côté front pour l'instant, mais c'est à garder en
+ * tête le jour où la galerie interrogera vraiment l'API.
  *
  * Ce que cet endpoint ne rend PAS, et dont la galerie aura besoin : le nombre
  * de likes, les vues et le statut de modération. C'est le principal manque à
@@ -27,6 +31,38 @@ import type { SkinDetail } from "@/types/api";
  * https://barbofus.com/unity-skins puis interroger `/api/skin/{id}`.
  */
 export const skins: SkinDetail[] = [
+  {
+    // Sans nom : le cas le plus fréquent en production.
+    id: 94882,
+    name: null,
+    image_path: "images/skins/17863971721002344099.png",
+    face: 503,
+    gender: 0,
+    colors: {
+      skin: "EFA06C",
+      hair: "4d4e45",
+      cloth_1: "BA2B3C",
+      cloth_2: "f7f6ee",
+      cloth_3: "4d4e45",
+      cloth_4: "f7f6ee",
+    },
+    breed: { id: 8, name: "Iop" },
+    user: { id: 1061, name: "Sainte Nuggets" },
+    items: {
+      hat: { name: "Masque Kamilou", icon_path: "images/icons/items/16764.webp" },
+      cape: { name: "Kimono Kamilou", icon_path: "images/icons/items/17577.webp" },
+      shield: null,
+      pet: { name: "Roufouléon", icon_path: "images/icons/items/18347.webp" },
+      costume: { name: "Costume Chimèrivan 3", icon_path: "images/icons/items/102690.webp" },
+      wings: null,
+      shoulderPads: {
+        name: "Épaulières du justicier",
+        icon_path: "images/icons/items/164884.webp",
+      },
+      mount: null,
+    },
+    created_at: "2026-08-10T21:26:12.000000Z",
+  },
   {
     id: 94879,
     name: "hupper",
