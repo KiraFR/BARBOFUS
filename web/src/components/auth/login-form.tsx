@@ -8,7 +8,7 @@ import { SubmitButton } from "@/components/forms/submit-button";
 import { fieldIcons, TextField } from "@/components/forms/text-field";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import type { Messages } from "@/messages";
+import { lien, type Locale, type Messages } from "@/messages";
 
 type FieldErrors = {
   email?: string;
@@ -22,7 +22,7 @@ type FieldErrors = {
  * c'est la validation, les états (repos, envoi en cours, erreur) et
  * l'accessibilité. Le jour où l'API existe, seul `onSubmit` change.
  */
-export function LoginForm({ t }: { t: Messages }) {
+export function LoginForm({ t, locale }: { t: Messages; locale: Locale }) {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
@@ -103,7 +103,7 @@ export function LoginForm({ t }: { t: Messages }) {
         </div>
 
         <Link
-          href="/forgot-password"
+          href={lien(locale, "/forgot-password")}
           className="text-gold-text hover:text-gold-text-lit text-lg font-normal transition-all"
         >
           {t.buttonForgotPassword}
@@ -112,7 +112,7 @@ export function LoginForm({ t }: { t: Messages }) {
         <p className="font-thin">
           {t.descriptionNoAccount}{" "}
           <Link
-            href="/register"
+            href={lien(locale, "/register")}
             className="text-gold-text hover:text-gold-text-lit text-lg font-normal transition-all"
           >
             {t.buttonRegister}

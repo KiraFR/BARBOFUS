@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { AuthScreen } from "@/components/auth/auth-screen";
 import { ResetPasswordForm } from "@/components/auth/reset-password-form";
-import { getMessages } from "@/messages";
+import { getMessages, type Locale } from "@/messages";
 
 export const metadata: Metadata = {
   title: "Réinitialisation du mot de passe",
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
 export default async function ResetPasswordPage({
   params,
 }: {
-  params: Promise<{ token: string }>;
+  params: Promise<{ locale: Locale; token: string }>;
 }) {
-  const { token } = await params;
-  const t = getMessages();
+  const { locale, token } = await params;
+  const t = getMessages(locale);
 
   return (
     <AuthScreen title={t.titleResetPassword} subtitle={t.descriptionResetPassword}>
-      <ResetPasswordForm t={t} token={token} />
+      <ResetPasswordForm t={t} locale={locale} token={token} />
     </AuthScreen>
   );
 }

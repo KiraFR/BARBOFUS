@@ -6,7 +6,7 @@ import { useState, type FormEvent } from "react";
 import { FormNotice } from "@/components/auth/auth-screen";
 import { SubmitButton } from "@/components/forms/submit-button";
 import { fieldIcons, TextField } from "@/components/forms/text-field";
-import type { Messages } from "@/messages";
+import { lien, type Locale, type Messages } from "@/messages";
 
 type FieldErrors = {
   email?: string;
@@ -20,7 +20,7 @@ type FieldErrors = {
  * états (repos, envoi en cours, envoyé). Le second encart est là pour ne
  * pas laisser croire qu'un e-mail a été envoyé alors qu'il ne l'a pas été.
  */
-export function ForgotPasswordForm({ t }: { t: Messages }) {
+export function ForgotPasswordForm({ t, locale }: { t: Messages; locale: Locale }) {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [pending, setPending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -81,7 +81,7 @@ export function ForgotPasswordForm({ t }: { t: Messages }) {
       <p className="font-thin">
         {t.descriptionPasswordRetrieved}{" "}
         <Link
-          href="/login"
+          href={lien(locale, "/login")}
           className="text-gold-text hover:text-gold-text-lit text-lg font-normal transition-all"
         >
           {t.buttonLogin}

@@ -6,7 +6,7 @@ import { useState, type FormEvent } from "react";
 import { FormNotice } from "@/components/auth/auth-screen";
 import { SubmitButton } from "@/components/forms/submit-button";
 import { fieldIcons, TextField } from "@/components/forms/text-field";
-import type { Messages } from "@/messages";
+import { lien, type Locale, type Messages } from "@/messages";
 
 type FieldErrors = {
   email?: string;
@@ -22,7 +22,7 @@ type FieldErrors = {
  * tel quel dans un champ caché, exactement comme le faisait la vue Blade
  * d'origine.
  */
-export function ResetPasswordForm({ t, token }: { t: Messages; token: string }) {
+export function ResetPasswordForm({ t, locale, token }: { t: Messages; locale: Locale; token: string }) {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
@@ -107,7 +107,7 @@ export function ResetPasswordForm({ t, token }: { t: Messages; token: string }) 
 
       <p className="font-thin">
         {t.descriptionPasswordRetrieved}{" "}
-        <Link href="/login" className="text-gold-text hover:text-gold-text-lit text-lg font-normal transition-all">
+        <Link href={lien(locale, "/login")} className="text-gold-text hover:text-gold-text-lit text-lg font-normal transition-all">
           {t.buttonLogin}
         </Link>
       </p>

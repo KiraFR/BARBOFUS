@@ -6,7 +6,7 @@ import { useState, type FormEvent } from "react";
 import { FormNotice } from "@/components/auth/auth-screen";
 import { SubmitButton } from "@/components/forms/submit-button";
 import { fieldIcons, TextField } from "@/components/forms/text-field";
-import type { Messages } from "@/messages";
+import { lien, type Locale, type Messages } from "@/messages";
 
 type FieldErrors = {
   name?: string;
@@ -23,7 +23,7 @@ type FieldErrors = {
  * erreur) et l'accessibilité. Le jour où l'API existe, seul `onSubmit`
  * change.
  */
-export function RegisterForm({ t }: { t: Messages }) {
+export function RegisterForm({ t, locale }: { t: Messages; locale: Locale }) {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
@@ -131,7 +131,7 @@ export function RegisterForm({ t }: { t: Messages }) {
       <p className="font-thin">
         {t.descriptionAlreadyRegistered}{" "}
         <Link
-          href="/login"
+          href={lien(locale, "/login")}
           className="text-gold-text hover:text-gold-text-lit text-lg font-normal transition-all"
         >
           {t.buttonLogin}

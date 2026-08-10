@@ -20,6 +20,7 @@ import type { Messages } from "@/messages";
  * Cette action n'est jamais suivie tant que `onSubmit` intercepte l'envoi,
  * mais elle documente la cible et servira telle quelle une fois l'API là.
  */
+// Pas de prop `locale` ici : cet écran ne contient aucun lien interne.
 export function VerifyEmailForm({ t, id }: { t: Messages; id: string }) {
   const [pending, setPending] = useState(false);
   const [sent, setSent] = useState(false);

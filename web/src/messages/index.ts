@@ -237,3 +237,19 @@ export const messages = {
 export function getMessages(locale: Locale = defaultLocale): Messages {
   return messages[locale] ?? messages[defaultLocale];
 }
+
+/** Vrai si la chaîne est une des langues du site. Sert à valider les URL. */
+export function estLocale(valeur: string): valeur is Locale {
+  return (locales as readonly string[]).includes(valeur);
+}
+
+/**
+ * Préfixe un chemin interne avec la langue courante.
+ *
+ * Toutes les pages vivent sous `/{langue}`, donc tout lien interne doit passer
+ * par ici. Un `<Link href="/login">` écrit en dur enverrait le visiteur hors
+ * de sa langue.
+ */
+export function lien(locale: Locale, chemin: string): string {
+  return chemin === "/" ? `/${locale}` : `/${locale}${chemin}`;
+}

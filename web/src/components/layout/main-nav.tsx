@@ -7,7 +7,7 @@ import { useState } from "react";
 import { images } from "@/lib/assets";
 import { navigationVisiteur, type NavItem } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
-import type { Messages } from "@/messages";
+import { lien, type Locale, type Messages } from "@/messages";
 
 /**
  * Barre de navigation principale.
@@ -24,15 +24,19 @@ import type { Messages } from "@/messages";
  * (Mon compte, Se déconnecter). Il n'y a pas d'authentification tant que l'API
  * n'est pas branchée, donc le menu est toujours celui d'un visiteur.
  */
-export function MainNav({ t }: { t: Messages }) {
+export function MainNav({ t, locale }: { t: Messages; locale: Locale }) {
   const pathname = usePathname();
   const [menuOuvert, setMenuOuvert] = useState(false);
   const items = navigationVisiteur();
 
+  // L'URL courante porte la langue en tête (« /fr/login ») ; on la retire pour
+  // comparer avec les chemins du menu, qui n'en ont pas.
+  const cheminSansLangue = pathname.replace(new RegExp(`^/${locale}`), "") || "/";
+
   function estActif(item: NavItem) {
     if (item.externe) return false;
-    if (item.href === "/") return pathname === "/";
-    return pathname.startsWith(item.href);
+    if (item.href === "/") return cheminSansLangue === "/";
+    return cheminSansLangue.startsWith(item.href);
   }
 
   return (
@@ -98,7 +102,7 @@ export function MainNav({ t }: { t: Messages }) {
           ) : (
             <Link
               key={item.href}
-              href={item.href}
+              href={lien(locale, item.href)}
               title={item.titre}
               aria-current={actif ? "page" : undefined}
               className={classes}
@@ -112,7 +116,7 @@ export function MainNav({ t }: { t: Messages }) {
 
       {/* Logo réduit, visible seulement quand la barre est repliée. */}
       <div className="flex h-12 items-center justify-between px-2 min-[1301px]:hidden">
-        <Link href="/" title="Accueil Barbofus" className="h-full py-1">
+        <Link href={lien(locale, "/")} title="Accueil Barbofus" className="h-full py-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={images.logo} alt="Barbofus" className="h-full w-auto" draggable={false} />
         </Link>

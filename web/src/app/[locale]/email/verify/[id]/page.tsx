@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { AuthScreen } from "@/components/auth/auth-screen";
 import { VerifyEmailForm } from "@/components/auth/verify-email-form";
-import { getMessages } from "@/messages";
+import { getMessages, type Locale } from "@/messages";
 
 export const metadata: Metadata = {
   title: "Vérification de l'e-mail",
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 // par `next dev`/`next build` : selon le moment où ce fichier est régénéré, les
 // deux versions coexistent et se fondent en un type incohérent, ce qui fait
 // échouer `tsc`. La forme explicite ci-dessous ne dépend d'aucune génération.
-export default async function VerifyEmailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const t = getMessages();
+export default async function VerifyEmailPage({ params }: { params: Promise<{ locale: Locale; id: string }> }) {
+  const { locale, id } = await params;
+  const t = getMessages(locale);
 
   return (
     // Pas de titre sur cet écran, contrairement aux autres écrans d'authentification.

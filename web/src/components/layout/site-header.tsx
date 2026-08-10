@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { images } from "@/lib/assets";
+import { lien, type Locale } from "@/messages";
 
 /**
  * En-tête illustré : décor de donjon, logo au centre, et la découpe ivoire en
@@ -17,7 +18,7 @@ import { images } from "@/lib/assets";
  * elles s'alignent toutes en bas et l'effet tombe à plat. À refaire
  * proprement, en CSS si possible ; l'en-tête tient debout sans elles.
  */
-export function SiteHeader() {
+export function SiteHeader({ locale }: { locale: Locale }) {
   return (
     <header
       className={cnHeader}
@@ -46,7 +47,7 @@ export function SiteHeader() {
       <div className="relative z-10 flex h-full justify-center">
         <div className="relative flex h-full max-w-1/2 justify-center overflow-hidden">
           <div className="absolute -z-10 h-full w-full bg-[linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.65)_25%,rgba(0,0,0,.65)_75%,transparent_100%)]" />
-          <Link href="/" title="Accueil Barbofus">
+          <Link href={lien(locale, "/")} title="Accueil Barbofus">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={images.logo}
