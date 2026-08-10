@@ -23,12 +23,15 @@ export default async function SkinsPage({ params }: { params: Promise<{ locale: 
   const t = getMessages(locale);
 
   return (
-    <main className="mx-auto w-full max-w-[1500px] flex-1 px-4 py-10">
-      <h1 className="font-display text-gold-text mb-8 text-center text-4xl uppercase">
+    <main className="w-full flex-1 py-10">
+      <h1 className="font-display text-gold-text mb-4 text-center text-4xl uppercase">
         {t.buttonSkins}
       </h1>
 
-      <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+      {/* Colonnes de largeur fixe en auto-fill, reprises du site actuel : les
+          cartes gardent leurs proportions et c'est leur nombre par ligne qui
+          s'adapte, jamais leur taille. */}
+      <div className="mx-auto grid w-[min(100%,93rem)] grid-cols-[repeat(auto-fill,13.125rem)] justify-center gap-x-8 gap-y-16 px-4 pt-[4.5rem]">
         {skins.map((skin) => (
           <SkinCard key={skin.id} skin={skin} locale={locale} />
         ))}

@@ -16,12 +16,11 @@ import type { SkinDetail } from "@/types/api";
  * l'utilisateur. Vérifié contre l'API — le skin 94883 s'appelle « Explorateur
  * rat » et son auteur « Phazo ».
  *
- * Trois cas observés en production que cette carte doit encaisser, et qui ont
- * chacun coûté une ligne :
+ * Trois cas observés en production que cette carte doit encaisser :
  *   - `name` peut être nul — beaucoup de skins sont publiés sans titre ;
  *   - `breed` peut être vide (`{}`) — la carte s'affiche alors sans classe ;
  *   - `image_path` peut renvoyer 404 — c'est l'état normal d'un skin qui vient
- *     d'être posté. D'où le fond en damier plutôt qu'une icône d'image cassée.
+ *     d'être posté. La place reste alors vide, comme sur le site actuel.
  *
  * Ce que la carte ne montre pas encore : le compteur de vues et le nombre de
  * likes. L'endpoint `/api/skin/{id}` ne les rend pas ; leurs emplacements sont
@@ -32,7 +31,9 @@ export function SkinCard({ skin, locale }: { skin: SkinDetail; locale: Locale })
   const description = classe ? `Skin Dofus ${classe}` : "Skin Dofus";
 
   return (
-    <article className="relative aspect-3/4">
+    // Hauteur fixe, reprise du site actuel (22,5 rem). La largeur vient de la
+    // colonne de la grille, fixée à 13,125 rem : les cartes ne s'étirent pas.
+    <article className="relative h-90 shadow-sm">
       {/* Le nom du skin, au-dessus de la carte. Souvent absent : la place
           reste alors vide, comme sur le site actuel. */}
       {skin.name ? (
@@ -51,19 +52,16 @@ export function SkinCard({ skin, locale }: { skin: SkinDetail; locale: Locale })
           <div className="absolute top-[-12.5rem] right-0 h-full w-[200%] rotate-[30deg] origin-bottom-right bg-[linear-gradient(0deg,rgba(255,255,255,0)_36%,rgba(255,255,255,0.05)_40%,rgba(255,255,255,0)_100%)]" />
         </div>
 
-        {/* L'image du skin. Le damier reste visible dessous quand elle manque. */}
+        {/* L'image du skin. Quand elle manque — cas courant pour un skin qui
+            vient d'être posté — la place reste simplement vide. */}
         <div className="absolute top-6 h-[calc(100%-3rem)] w-full">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 m-auto h-2/3 w-1/2 rounded-sm opacity-[0.06] [background-image:repeating-conic-gradient(var(--color-ivory)_0_25%,transparent_0_50%)] [background-size:16px_16px]"
-          />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={storageUrl(skin.image_path)}
             alt={skin.name ?? description}
             loading="lazy"
             draggable={false}
-            className="relative mx-auto h-full transition-transform group-hover:scale-105"
+            className="mx-auto h-full transition-transform group-hover:scale-105"
           />
         </div>
       </Link>
