@@ -94,7 +94,11 @@ export function GalleryToolbar({
               estAscendant(triCourant) ? "" : "rotate-90",
             )}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+            />
           </svg>
 
           <p className="text-ivory text-base font-thin">{t.gallerySortBy}</p>

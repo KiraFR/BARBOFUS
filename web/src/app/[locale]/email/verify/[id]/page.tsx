@@ -18,7 +18,11 @@ export const metadata: Metadata = {
 // par `next dev`/`next build` : selon le moment où ce fichier est régénéré, les
 // deux versions coexistent et se fondent en un type incohérent, ce qui fait
 // échouer `tsc`. La forme explicite ci-dessous ne dépend d'aucune génération.
-export default async function VerifyEmailPage({ params }: { params: Promise<{ locale: Locale; id: string }> }) {
+export default async function VerifyEmailPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale; id: string }>;
+}) {
   const { locale, id } = await params;
   const t = getMessages(locale);
 

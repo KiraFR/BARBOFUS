@@ -44,8 +44,7 @@ export function estAscendant(code: CodeTri): boolean {
  */
 export function trierSkins(skins: SkinCardItem[], code: CodeTri): SkinCardItem[] {
   const copie = [...skins];
-  const parDate = (a: SkinCardItem, b: SkinCardItem) =>
-    a.created_at.localeCompare(b.created_at);
+  const parDate = (a: SkinCardItem, b: SkinCardItem) => a.created_at.localeCompare(b.created_at);
 
   switch (code) {
     case "0,DESC":
@@ -53,9 +52,7 @@ export function trierSkins(skins: SkinCardItem[], code: CodeTri): SkinCardItem[]
     case "0,ASC":
       return copie.sort(parDate);
     case "3,ASC":
-      return copie.sort((a, b) =>
-        (a.breed.name ?? "").localeCompare(b.breed.name ?? "", "fr"),
-      );
+      return copie.sort((a, b) => (a.breed.name ?? "").localeCompare(b.breed.name ?? "", "fr"));
     case "4,DESC":
       return copie.sort((a, b) => b.total_views - a.total_views);
     default:

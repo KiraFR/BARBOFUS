@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { GalleryToolbar } from "@/components/skins/gallery-toolbar";
 import { SkinCard } from "@/components/skins/skin-card";
 import { SkinFilters } from "@/components/skins/skin-filters";
-import { classesDisponibles, filtrerSkins, lireFiltres } from "@/lib/filtres";
+import { filtrerSkins, lireFiltres } from "@/lib/filtres";
 import { skins } from "@/lib/fixtures/skins";
 import { alternatesPour } from "@/lib/seo";
 import { estCodeTri, TRI_DEFAUT, trierSkins } from "@/lib/tri";
@@ -45,7 +45,7 @@ export default async function SkinsPage({
 
   return (
     <div className="flex w-full flex-1 flex-col min-[1501px]:flex-row">
-      <SkinFilters t={t} filtres={filtres} classes={classesDisponibles(skins)} />
+      <SkinFilters t={t} filtres={filtres} />
 
       <main className="w-full flex-1 py-6">
         <GalleryToolbar t={t} nombreDeSkins={liste.length} triCourant={tri} locale={locale} />

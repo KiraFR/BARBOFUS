@@ -63,9 +63,7 @@ export function MainNav({ t, locale }: { t: Messages; locale: Locale }) {
           const classes = cn(
             "flex h-12 items-center px-5 transition-all focus:outline-none",
             "min-[1301px]:h-8",
-            actif
-              ? "text-ivory-dark relative font-light"
-              : "hover:text-ivory-dark",
+            actif ? "text-ivory-dark relative font-light" : "hover:text-ivory-dark",
             // Séparateur vertical entre les entrées, sauf après la dernière et
             // autour de l'entrée active (l'original les retire aussi).
             !actif && !dernier && "min-[1301px]:border-r-inactive min-[1301px]:border-r",
@@ -126,7 +124,9 @@ export function MainNav({ t, locale }: { t: Messages; locale: Locale }) {
         type="button"
         onClick={() => setMenuOuvert((ouvert) => !ouvert)}
         aria-expanded={menuOuvert}
-        aria-label={menuOuvert ? "Fermeture du menu de navigation" : "Ouverture du menu de navigation"}
+        aria-label={
+          menuOuvert ? "Fermeture du menu de navigation" : "Ouverture du menu de navigation"
+        }
         className="text-ivory fixed top-2 right-2 z-50 h-10 w-10 min-[1301px]:hidden"
       >
         <svg
@@ -140,7 +140,11 @@ export function MainNav({ t, locale }: { t: Messages; locale: Locale }) {
           {menuOuvert ? (
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           ) : (
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
           )}
         </svg>
       </button>

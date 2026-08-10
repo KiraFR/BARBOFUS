@@ -93,7 +93,12 @@ export function filtrerSkins(skins: SkinCardItem[], filtres: Filtres): SkinCardI
       if (!cible.includes(recherche)) return false;
     }
 
-    if (filtres.classes.length > 0 && !filtres.classes.includes(skin.breed.name ?? "")) {
+    // Comparaison normalisée : le sélecteur affiche « Féca » quand l'API rend
+    // « Feca », et les deux doivent se reconnaître.
+    if (
+      filtres.classes.length > 0 &&
+      !filtres.classes.some((c) => normaliser(c) === normaliser(skin.breed.name ?? ""))
+    ) {
       return false;
     }
 
@@ -111,7 +116,8 @@ export function filtrerSkins(skins: SkinCardItem[], filtres: Filtres): SkinCardI
     // les montures sont concernés ; les autres emplacements passent toujours.
     if (
       items.some(
-        (item) => TYPES_TOUS.includes(item.category as never) && !filtres.types.includes(item.category),
+        (item) =>
+          TYPES_TOUS.includes(item.category as never) && !filtres.types.includes(item.category),
       )
     ) {
       return false;
@@ -121,11 +127,33 @@ export function filtrerSkins(skins: SkinCardItem[], filtres: Filtres): SkinCardI
   });
 }
 
-/** Les classes présentes dans le jeu de données, pour peupler le sélecteur. */
-export function classesDisponibles(skins: SkinCardItem[]): string[] {
-  const noms = new Set<string>();
-  for (const skin of skins) {
-    if (skin.breed.name) noms.add(skin.breed.name);
-  }
-  return [...noms].sort((a, b) => a.localeCompare(b, "fr"));
-}
+/**
+ * Les dix-neuf classes du jeu, dans l'ordre de leur identifiant Dofus — le
+ * même que celui du sélecteur du site actuel.
+ *
+ * La liste est écrite en dur plutôt que déduite des skins affichés : sinon le
+ * sélecteur ne proposerait que les classes présentes dans la page, ce qui est
+ * absurde pour un filtre. Elle bougera le jour où Ankama ajoutera une classe,
+ * ce qui arrive environ une fois tous les deux ans.
+ */
+export const CLASSES = [
+  "Féca",
+  "Osamodas",
+  "Enutrof",
+  "Sram",
+  "Xélor",
+  "Ecaflip",
+  "Eniripsa",
+  "Iop",
+  "Crâ",
+  "Sadida",
+  "Sacrieur",
+  "Pandawa",
+  "Roublard",
+  "Zobal",
+  "Steamer",
+  "Eliotrope",
+  "Huppermage",
+  "Ouginak",
+  "Forgelance",
+] as const;

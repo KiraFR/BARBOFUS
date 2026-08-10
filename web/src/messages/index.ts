@@ -163,8 +163,7 @@ export const messages = {
 
     titleRegister: "Register",
     descriptionRegister1: "Come join us on Barbofus !",
-    descriptionRegister2:
-      "Warning! The verification email may end up in your spam/junk folder.",
+    descriptionRegister2: "Warning! The verification email may end up in your spam/junk folder.",
     inputName: "Name",
     inputPasswordConfirmation: "Confirmation",
     descriptionAlreadyRegistered: "Already registered ?",

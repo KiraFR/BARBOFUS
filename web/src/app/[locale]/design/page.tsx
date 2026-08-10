@@ -85,8 +85,8 @@ export default function DesignPage() {
       <header className="space-y-2">
         <h1 className="font-display text-4xl text-gold-text">Jetons de design</h1>
         <p className="text-muted-foreground max-w-2xl text-sm">
-          Page de contrôle interne — elle ne fait pas partie du site. Elle sert à vérifier que
-          la palette, la typographie et les composants de base sont en place et cohérents.
+          Page de contrôle interne — elle ne fait pas partie du site. Elle sert à vérifier que la
+          palette, la typographie et les composants de base sont en place et cohérents.
         </p>
       </header>
 
@@ -131,8 +131,8 @@ export default function DesignPage() {
       <Section title="Typographie">
         <div className="space-y-3">
           <p className="text-muted-foreground text-sm">
-            « MADE Okin » et « MV Boli » ne sont pas encore embarquées — question de licence
-            non tranchée. La pile retombe sur Geist en attendant.
+            « MADE Okin » et « MV Boli » ne sont pas encore embarquées — question de licence non
+            tranchée. La pile retombe sur Geist en attendant.
           </p>
           <p className="font-display text-3xl">
             font-display — titres — Le Feca contemple l&apos;horizon
@@ -175,8 +175,8 @@ export default function DesignPage() {
                   {skin.name ?? "Sans nom"}
                 </CardTitle>
                 <p className="text-muted-foreground truncate text-xs">
-                  {skin.breed.name ?? "Classe inconnue"} ·{" "}
-                  {skin.gender === 1 ? "Femme" : "Homme"} · par {skin.user.name}
+                  {skin.breed.name ?? "Classe inconnue"} · {skin.gender === 1 ? "Femme" : "Homme"} ·
+                  par {skin.user.name}
                 </p>
               </CardHeader>
               <CardContent>

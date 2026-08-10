@@ -22,10 +22,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       <h1 className="font-display text-gold-text text-4xl">BARBOFUS</h1>
       <p className="text-muted-foreground">Refonte en cours. Rien à voir ici pour le moment.</p>
       <p>
-        <Link
-          href={lien(locale, "/design")}
-          className="text-primary underline underline-offset-4"
-        >
+        <Link href={lien(locale, "/design")} className="text-primary underline underline-offset-4">
           Voir les jetons de design
         </Link>
       </p>

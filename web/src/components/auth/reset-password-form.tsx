@@ -22,7 +22,15 @@ type FieldErrors = {
  * tel quel dans un champ caché, exactement comme le faisait la vue Blade
  * d'origine.
  */
-export function ResetPasswordForm({ t, locale, token }: { t: Messages; locale: Locale; token: string }) {
+export function ResetPasswordForm({
+  t,
+  locale,
+  token,
+}: {
+  t: Messages;
+  locale: Locale;
+  token: string;
+}) {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
@@ -67,7 +75,9 @@ export function ResetPasswordForm({ t, locale, token }: { t: Messages; locale: L
     setPending(true);
     await new Promise((resolve) => setTimeout(resolve, 700));
     setPending(false);
-    setNotice("L'API n'est pas encore branchée : le mot de passe ne peut pas encore être réinitialisé.");
+    setNotice(
+      "L'API n'est pas encore branchée : le mot de passe ne peut pas encore être réinitialisé.",
+    );
   }
 
   return (
@@ -107,7 +117,10 @@ export function ResetPasswordForm({ t, locale, token }: { t: Messages; locale: L
 
       <p className="font-thin">
         {t.descriptionPasswordRetrieved}{" "}
-        <Link href={lien(locale, "/login")} className="text-gold-text hover:text-gold-text-lit text-lg font-normal transition-all">
+        <Link
+          href={lien(locale, "/login")}
+          className="text-gold-text hover:text-gold-text-lit text-lg font-normal transition-all"
+        >
           {t.buttonLogin}
         </Link>
       </p>

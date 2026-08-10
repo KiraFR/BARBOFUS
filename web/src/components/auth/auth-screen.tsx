@@ -48,7 +48,13 @@ export function AuthScreen({
  * obligeait à injecter du HTML. Un simple retour à la ligne fait la même chose
  * sans ouvrir cette porte.
  */
-export function FormNotice({ children, tone = "info" }: { children: ReactNode; tone?: "info" | "success" }) {
+export function FormNotice({
+  children,
+  tone = "info",
+}: {
+  children: ReactNode;
+  tone?: "info" | "success";
+}) {
   const tones = {
     info: "bg-pending-bg text-gold-text",
     success: "bg-emerald-dark/20 text-emerald-lit",

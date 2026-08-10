@@ -10,11 +10,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function LoginPage({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
+export default async function LoginPage({ params }: { params: Promise<{ locale: Locale }> }) {
   // La langue a déjà été validée par la mise en page : une valeur inconnue
   // n'atteint jamais cette page, elle part en 404.
   const { locale } = await params;
