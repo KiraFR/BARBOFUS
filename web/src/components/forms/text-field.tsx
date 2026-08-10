@@ -24,6 +24,7 @@ export function TextField({
   icon,
   error,
   autoComplete,
+  maxLength = 255,
   className,
 }: {
   /** Sert de placeholder et d'étiquette accessible. */
@@ -33,6 +34,8 @@ export function TextField({
   icon: ReactNode;
   error?: string;
   autoComplete?: string;
+  /** 255 par défaut, comme l'original. Le champ « nom » descend à 64. */
+  maxLength?: number;
   className?: string;
 }) {
   const errorId = `${name}-error`;
@@ -48,7 +51,7 @@ export function TextField({
           id={name}
           name={name}
           type={type}
-          maxLength={255}
+          maxLength={maxLength}
           // Le placeholder doit rester non vide : c'est lui qui rend
           // `:placeholder-shown` utilisable pour détecter un champ vide.
           placeholder={label}
@@ -103,6 +106,13 @@ export function TextField({
 
 /** Les tracés d'icônes utilisés par les formulaires, repris de l'original. */
 export const fieldIcons = {
+  name: (
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+    />
+  ),
   email: (
     <path
       strokeLinecap="round"

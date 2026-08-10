@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 
+import { FormNotice } from "@/components/auth/auth-screen";
+import { SubmitButton } from "@/components/forms/submit-button";
 import { fieldIcons, TextField } from "@/components/forms/text-field";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import type { Messages } from "@/messages";
@@ -82,19 +83,9 @@ export function LoginForm({ t }: { t: Messages }) {
         autoComplete="current-password"
       />
 
-      <Button
-        type="submit"
-        disabled={pending}
-        className="gold-gradient text-anthracite rounded-lg px-8 py-3 text-lg font-normal uppercase transition-all hover:tracking-widest hover:brightness-110 focus:brightness-75 disabled:tracking-normal disabled:brightness-75"
-      >
-        {t.buttonLogin}
-      </Button>
+      <SubmitButton disabled={pending}>{t.buttonLogin}</SubmitButton>
 
-      {notice ? (
-        <p role="status" className="bg-pending-bg text-gold-text max-w-[350px] rounded-md px-6 py-3 text-center text-sm font-light">
-          {notice}
-        </p>
-      ) : null}
+      {notice ? <FormNotice>{notice}</FormNotice> : null}
 
       <div className="flex w-full max-w-[350px] flex-col gap-y-4">
         <div className="flex items-center gap-x-2">
