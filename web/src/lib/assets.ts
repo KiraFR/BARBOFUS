@@ -16,7 +16,20 @@
  * distant imposerait une configuration `remotePatterns` et ferait transiter
  * chaque image par l'optimiseur pour rien.
  */
-const BASE = "https://barbofus.com/storage/images/misc_ui";
+const STORAGE = "https://barbofus.com/storage";
+
+const BASE = `${STORAGE}/images/misc_ui`;
+
+/**
+ * Transforme un chemin rendu par l'API en URL affichable.
+ *
+ * L'API rend des chemins relatifs à `/storage` (« images/skins/1786….png »,
+ * « images/icons/items/17627.webp »). Rendus, les skins comme les icônes
+ * d'items passent par ici.
+ */
+export function storageUrl(chemin: string): string {
+  return `${STORAGE}/${chemin.replace(/^\/+/, "")}`;
+}
 
 export const images = {
   logo: `${BASE}/Barbofus_Logo.webp`,

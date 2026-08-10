@@ -157,6 +157,81 @@ export interface Role {
   name: string;
 }
 
+/* ---------------------------------------------------------------------------
+   La forme réellement servie par l'API existante.
+
+   `GET /api/skin/{id}` (ApiSkinController) existe déjà en production et rend
+   un skin prêt à l'affichage : relations résolues, items nommés, icônes.
+   Ce n'est pas la table brute, et c'est tant mieux — c'est ce que le site
+   possède de plus proche d'un contrat d'API, donc on s'aligne dessus plutôt
+   que d'en inventer un autre.
+
+   Trois écarts avec la table, à connaître :
+   - les couleurs sont en hexadécimal SANS le croisillon (« E9AF86 ») ;
+   - la classe s'appelle `breed` ici, `race` en base ;
+   - ni likes, ni vues, ni statut : la galerie en a besoin, donc son endpoint
+     devra rendre davantage que celui-ci.
+--------------------------------------------------------------------------- */
+
+/** Couleur hexadécimale sans croisillon, telle que l'API la rend. */
+export type HexSansCroisillon = string;
+
+export interface SkinColors {
+  skin: HexSansCroisillon;
+  hair: HexSansCroisillon;
+  cloth_1: HexSansCroisillon;
+  cloth_2: HexSansCroisillon;
+  cloth_3: HexSansCroisillon;
+  cloth_4: HexSansCroisillon;
+}
+
+/** Un item équipé, tel que l'API le résout. */
+export interface SkinItem {
+  name: string;
+  /** Chemin relatif à `/storage`, ex. `images/icons/items/17627.webp`. */
+  icon_path: string;
+}
+
+/** Les huit emplacements d'équipement. Chacun peut être vide. */
+export interface SkinItems {
+  hat: SkinItem | null;
+  cape: SkinItem | null;
+  shield: SkinItem | null;
+  pet: SkinItem | null;
+  costume: SkinItem | null;
+  wings: SkinItem | null;
+  shoulderPads: SkinItem | null;
+  mount: SkinItem | null;
+}
+
+/**
+ * Une classe de personnage, telle que l'API la rend.
+ *
+ * Les champs sont facultatifs : la production sert `{}` pour certains skins
+ * (le skin 94867, par exemple). Le front doit donc savoir afficher une carte
+ * sans classe — ce n'est pas une précaution, c'est un cas observé.
+ */
+export interface SkinBreed {
+  id?: number;
+  name?: string;
+}
+
+/** Un skin prêt à l'affichage. Forme de `GET /api/skin/{id}`. */
+export interface SkinDetail {
+  id: number;
+  /** Souvent nul : beaucoup de skins sont publiés sans titre. */
+  name: string | null;
+  /** Chemin relatif à `/storage`, ex. `images/skins/1786….png`. */
+  image_path: string;
+  face: number;
+  gender: Gender | null;
+  colors: SkinColors;
+  breed: SkinBreed;
+  user: PublicUser;
+  items: SkinItems;
+  created_at: string;
+}
+
 /**
  * Pagination par curseur. Le site dépasse les 60 000 skins : la pagination par
  * numéro de page (OFFSET) s'effondre sur ces volumes, elle est proscrite.

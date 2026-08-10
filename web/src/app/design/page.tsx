@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-import { SkinPlaceholder } from "@/components/skin-placeholder";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { storageUrl } from "@/lib/assets";
 import { skins } from "@/lib/fixtures/skins";
 import type { SkinStatus } from "@/types/api";
 
@@ -163,35 +163,49 @@ export default function DesignPage() {
 
       <Section title="Carte de skin">
         <p className="text-muted-foreground -mt-2 max-w-2xl text-sm">
-          Données de démonstration, silhouettes teintées par les vraies couleurs de chaque skin.
-          Ce n&apos;est pas la carte définitive de la galerie — juste la preuve que le contrat de
-          données traverse jusqu&apos;à l&apos;écran.
+          Douze skins réels, récupérés en production. Ce n&apos;est pas la carte définitive de la
+          galerie — juste la preuve que le contrat de données traverse jusqu&apos;à l&apos;écran,
+          images comprises.
         </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {skins.map((skin) => (
+          {skins.slice(0, 8).map((skin) => (
             <Card key={skin.id} className="overflow-hidden">
               <CardHeader className="gap-2">
-                <div className="flex items-start justify-between gap-2">
-                  <CardTitle className="font-display text-base">
-                    {skin.name ?? "Sans nom"}
-                  </CardTitle>
-                  <StatusBadge status={skin.status} />
-                </div>
-                <p className="text-muted-foreground text-xs">
-                  {skin.race?.name ?? "Classe inconnue"} ·{" "}
-                  {skin.gender === 1 ? "Femme" : "Homme"} · par {skin.author.name}
+                <CardTitle className="font-display truncate text-base">
+                  {skin.name ?? "Sans nom"}
+                </CardTitle>
+                <p className="text-muted-foreground truncate text-xs">
+                  {skin.breed.name ?? "Classe inconnue"} ·{" "}
+                  {skin.gender === 1 ? "Femme" : "Homme"} · par {skin.user.name}
                 </p>
               </CardHeader>
               <CardContent>
                 <div className="bg-anthracite-lit flex justify-center rounded-md py-4">
-                  <SkinPlaceholder skin={skin} className="h-40" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={storageUrl(skin.image_path)}
+                    alt={skin.name ?? `Skin ${skin.id}`}
+                    loading="lazy"
+                    className="h-40 w-auto"
+                  />
                 </div>
               </CardContent>
-              <CardFooter className="text-muted-foreground justify-between text-xs">
-                <span className={skin.liked_by_me ? "text-heart-lit" : undefined}>
-                  ♥ {skin.likes_count}
-                </span>
-                <span>{skin.total_views.toLocaleString("fr-FR")} vues</span>
+              <CardFooter className="text-muted-foreground gap-1.5 text-xs">
+                {/* Les icônes d'items, elles aussi servies par la production. */}
+                {Object.values(skin.items)
+                  .filter((item) => item !== null)
+                  .slice(0, 6)
+                  .map((item) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={item.icon_path}
+                      src={storageUrl(item.icon_path)}
+                      alt={item.name}
+                      title={item.name}
+                      loading="lazy"
+                      className="h-6 w-6"
+                    />
+                  ))}
               </CardFooter>
             </Card>
           ))}
