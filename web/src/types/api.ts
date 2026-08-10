@@ -233,6 +233,20 @@ export interface SkinDetail {
 }
 
 /**
+ * Ce dont la galerie a besoin pour peindre une carte.
+ *
+ * C'est `SkinDetail` plus le compteur de vues, que la carte affiche en bas à
+ * droite. `/api/skin/{id}` ne le rend pas : l'endpoint de galerie devra le
+ * fournir, et ce type est là pour s'en souvenir.
+ *
+ * Viendra s'y ajouter le nombre de likes, ainsi que l'information « ce
+ * visiteur a-t-il déjà liké ? », quand le cœur de la carte sera actif.
+ */
+export interface SkinCardItem extends SkinDetail {
+  total_views: number;
+}
+
+/**
  * Pagination par curseur. Le site dépasse les 60 000 skins : la pagination par
  * numéro de page (OFFSET) s'effondre sur ces volumes, elle est proscrite.
  */

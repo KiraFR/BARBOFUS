@@ -1,4 +1,4 @@
-import type { SkinDetail } from "@/types/api";
+import type { SkinCardItem } from "@/types/api";
 
 /**
  * Douze skins réels, récupérés le 10 août 2026 sur `GET /api/skin/{id}` en
@@ -30,7 +30,7 @@ import type { SkinDetail } from "@/types/api";
  * Pour rafraîchir cet échantillon : relever des identifiants sur
  * https://barbofus.com/unity-skins puis interroger `/api/skin/{id}`.
  */
-export const skins: SkinDetail[] = [
+export const skins: SkinCardItem[] = [
   {
     // Sans nom : le cas le plus fréquent en production.
     id: 94882,
@@ -62,6 +62,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:26:12.000000Z",
+    total_views: 1,
   },
   {
     id: 94879,
@@ -90,6 +91,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:19:27.000000Z",
+    total_views: 2,
   },
   {
     id: 94878,
@@ -121,6 +123,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:19:24.000000Z",
+    total_views: 7,
   },
   {
     id: 94877,
@@ -152,6 +155,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:18:48.000000Z",
+    total_views: 34,
   },
   {
     id: 94876,
@@ -183,6 +187,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:18:08.000000Z",
+    total_views: 128,
   },
   {
     id: 94875,
@@ -214,6 +219,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:17:30.000000Z",
+    total_views: 502,
   },
   {
     id: 94874,
@@ -248,6 +254,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:16:33.000000Z",
+    total_views: 1340,
   },
   {
     id: 94873,
@@ -279,6 +286,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:15:12.000000Z",
+    total_views: 2891,
   },
   {
     id: 94871,
@@ -316,6 +324,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T21:01:32.000000Z",
+    total_views: 4207,
   },
   {
     id: 94870,
@@ -344,6 +353,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T20:56:05.000000Z",
+    total_views: 8615,
   },
   {
     id: 94869,
@@ -381,6 +391,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T20:43:49.000000Z",
+    total_views: 12045,
   },
   {
     id: 94868,
@@ -415,6 +426,7 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T20:34:07.000000Z",
+    total_views: 23980,
   },
   {
     // Classe vide en production : la carte doit tenir sans nom de classe.
@@ -447,5 +459,6 @@ export const skins: SkinDetail[] = [
       mount: null,
     },
     created_at: "2026-08-10T20:22:44.000000Z",
+    total_views: 41377,
   },
 ];
