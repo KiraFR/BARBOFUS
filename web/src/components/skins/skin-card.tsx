@@ -7,9 +7,14 @@ import type { SkinDetail } from "@/types/api";
 /**
  * Une carte de la galerie.
  *
- * Portée de la galerie actuelle, dont elle garde l'organisation : l'auteur en
- * haut, l'image au centre, le nom du skin en bas à gauche. Toute la carte est
- * un lien vers la fiche du skin.
+ * Portée de la galerie actuelle, dont elle garde l'organisation : le nom du
+ * skin en haut, l'image au centre, l'auteur en bas à gauche. Toute la carte
+ * est un lien vers la fiche du skin.
+ *
+ * Attention en relisant le HTML d'origine : l'élément du haut porte la classe
+ * `skinCardUserName` alors qu'il contient le nom du SKIN, pas celui de
+ * l'utilisateur. Vérifié contre l'API — le skin 94883 s'appelle « Explorateur
+ * rat » et son auteur « Phazo ».
  *
  * Trois cas observés en production que cette carte doit encaisser, et qui ont
  * chacun coûté une ligne :
@@ -28,10 +33,13 @@ export function SkinCard({ skin, locale }: { skin: SkinDetail; locale: Locale })
 
   return (
     <article className="relative aspect-3/4">
-      {/* L'auteur, au-dessus de la carte. */}
-      <p className="text-inactive absolute top-0 z-10 w-full truncate px-2 text-center text-sm font-thin italic">
-        {skin.user.name}
-      </p>
+      {/* Le nom du skin, au-dessus de la carte. Souvent absent : la place
+          reste alors vide, comme sur le site actuel. */}
+      {skin.name ? (
+        <p className="text-inactive absolute top-0 z-10 w-full truncate px-2 text-center text-sm font-thin italic">
+          {skin.name}
+        </p>
+      ) : null}
 
       <Link
         href={lien(locale, `/skin/${skin.id}`)}
@@ -60,13 +68,12 @@ export function SkinCard({ skin, locale }: { skin: SkinDetail; locale: Locale })
         </div>
       </Link>
 
-      {/* Le nom du skin, en bas. Sur le site actuel c'est un bouton qui filtre
-          la galerie sur ce nom ; il le redeviendra avec les filtres. */}
-      {skin.name ? (
-        <p className="text-gold-text absolute bottom-0 left-0 z-10 w-[calc(100%-3.75rem)] truncate px-2 pb-0.5 text-xs font-light">
-          {skin.name}
-        </p>
-      ) : null}
+      {/* L'auteur, en bas à gauche. Sur le site actuel c'est un bouton qui
+          filtre la galerie sur ce pseudo ; il le redeviendra avec les filtres.
+          La largeur laisse la place au compteur de vues, à sa droite. */}
+      <p className="text-gold-text absolute bottom-0 left-0 z-10 w-[calc(100%-3.75rem)] truncate px-2 pb-0.5 text-xs font-light">
+        {skin.user.name}
+      </p>
     </article>
   );
 }
