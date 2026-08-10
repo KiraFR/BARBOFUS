@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { GalleryToolbar } from "@/components/skins/gallery-toolbar";
 import { SkinCard } from "@/components/skins/skin-card";
+import { SkinFilters } from "@/components/skins/skin-filters";
+import { classesDisponibles, filtrerSkins, lireFiltres } from "@/lib/filtres";
 import { skins } from "@/lib/fixtures/skins";
 import { alternatesPour } from "@/lib/seo";
 import { estCodeTri, TRI_DEFAUT, trierSkins } from "@/lib/tri";
@@ -16,43 +18,51 @@ export const metadata: Metadata = {
 /**
  * La galerie de skins.
  *
- * Le tri est lu dans l'URL, ce qui rend la page dynamique — c'est assumé :
- * une galerie triée et filtrée ne peut pas être figée à la compilation, et le
- * rendu serveur suffit largement au référencement.
+ * Les filtres et le tri sont lus dans l'URL, ce qui rend la page dynamique —
+ * c'est assumé : une galerie filtrée ne peut pas être figée à la compilation,
+ * et le rendu serveur suffit largement au référencement. En contrepartie, une
+ * galerie filtrée devient partageable, ce que le site actuel ne permet pas.
  *
- * Restent à venir : les filtres, et le chargement à la volée.
+ * Reste à venir : le chargement à la volée, et la colonne de droite avec le
+ * classement Miss'Skin.
  */
 export default async function SkinsPage({
   params,
   searchParams,
 }: {
   params: Promise<{ locale: Locale }>;
-  searchParams: Promise<{ sort?: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale } = await params;
-  const { sort } = await searchParams;
+  const requete = await searchParams;
   const t = getMessages(locale);
 
-  const tri = estCodeTri(sort) ? sort : TRI_DEFAUT;
-  const liste = trierSkins(skins, tri);
+  const sortDemande = typeof requete.sort === "string" ? requete.sort : undefined;
+  const tri = estCodeTri(sortDemande) ? sortDemande : TRI_DEFAUT;
+  const filtres = lireFiltres(requete);
+
+  const liste = trierSkins(filtrerSkins(skins, filtres), tri);
 
   return (
-    <main className="w-full flex-1 py-6">
-      <GalleryToolbar
-        t={t}
-        nombreDeSkins={liste.length}
-        triCourant={tri}
-        locale={locale}
-      />
+    <div className="flex w-full flex-1 flex-col min-[1501px]:flex-row">
+      <SkinFilters t={t} filtres={filtres} classes={classesDisponibles(skins)} />
 
-      {/* Colonnes de largeur fixe en auto-fill, reprises du site actuel : les
-          cartes gardent leurs proportions et c'est leur nombre par ligne qui
-          s'adapte, jamais leur taille. */}
-      <div className="mx-auto grid w-[min(100%,93rem)] grid-cols-[repeat(auto-fill,13.125rem)] justify-center gap-x-8 gap-y-16 px-4 pt-[4.5rem]">
-        {liste.map((skin) => (
-          <SkinCard key={skin.id} skin={skin} locale={locale} />
-        ))}
-      </div>
-    </main>
+      <main className="w-full flex-1 py-6">
+        <GalleryToolbar t={t} nombreDeSkins={liste.length} triCourant={tri} locale={locale} />
+
+        {liste.length === 0 ? (
+          <p className="text-inactive mt-24 text-center italic">{t.filterNoResult}</p>
+        ) : (
+          /* Colonnes de largeur fixe en auto-fill, reprises du site actuel :
+             les cartes gardent leurs proportions et c'est leur nombre par
+             ligne qui s'adapte, jamais leur taille. */
+          <div className="mx-auto grid w-[min(100%,93rem)] grid-cols-[repeat(auto-fill,13.125rem)] justify-center gap-x-8 gap-y-16 px-4 pt-[4.5rem]">
+            {liste.map((skin) => (
+              <SkinCard key={skin.id} skin={skin} locale={locale} />
+            ))}
+          </div>
+        )}
+      </main>
+    </div>
   );
 }

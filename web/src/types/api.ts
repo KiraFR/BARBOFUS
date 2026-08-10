@@ -185,11 +185,29 @@ export interface SkinColors {
   cloth_4: HexSansCroisillon;
 }
 
+/**
+ * L'emplacement d'équipement d'un item.
+ * Valeurs observées : hat, cape, shield, costume, shoulderpads, wings, pet,
+ * mount.
+ */
+export type ItemCategory = string;
+
+/**
+ * La nature d'un item, sur laquelle porte le filtre « Les items peuvent
+ * être : » de la galerie.
+ *   - `ceremonial`   → objet d'apparat
+ *   - `livingObject` → objet vivant
+ *   - `mimisymbic`   → mimibiotable
+ */
+export type ItemSubcategory = "ceremonial" | "livingObject" | "mimisymbic" | (string & {});
+
 /** Un item équipé, tel que l'API le résout. */
 export interface SkinItem {
   name: string;
   /** Chemin relatif à `/storage`, ex. `images/icons/items/17627.webp`. */
   icon_path: string;
+  category: ItemCategory;
+  subcategory: ItemSubcategory;
 }
 
 /** Les huit emplacements d'équipement. Chacun peut être vide. */
