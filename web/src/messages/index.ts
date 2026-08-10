@@ -25,6 +25,13 @@ export type Messages = (typeof messages)["fr"];
 
 export const messages = {
   fr: {
+    buttonHome: "Accueil",
+    buttonSkins: "Skins",
+    buttonHavenbags: "Havre-Sacs",
+    buttonTools: "Barb'Outils",
+    buttonDashboard: "Mon compte",
+    buttonLogout: "Se déconnecter",
+
     titleLogin: "Connexion",
     descriptionLogin: "Bienvenue sur Barbofus !",
     inputEmail: "E-mail",
@@ -71,6 +78,13 @@ export const messages = {
     errorPasswordMismatch: "Les deux mots de passe ne correspondent pas.",
   },
   en: {
+    buttonHome: "Home",
+    buttonSkins: "Skins",
+    buttonHavenbags: "Havenbags",
+    buttonTools: "Barb'Tools",
+    buttonDashboard: "My profile",
+    buttonLogout: "Log out",
+
     titleLogin: "Login",
     descriptionLogin: "Welcome to Barbofus !",
     inputEmail: "Email",
@@ -115,6 +129,13 @@ export const messages = {
     errorPasswordMismatch: "The two passwords do not match.",
   },
   es: {
+    buttonHome: "Inicio",
+    buttonSkins: "Skins",
+    buttonHavenbags: "Merkasakos",
+    buttonTools: "Barb'Herramientas",
+    buttonDashboard: "Mi perfil",
+    buttonLogout: "Cerrar sesión",
+
     titleLogin: "Iniciar sesión",
     descriptionLogin: "¡Bienvenido a Barbofus!",
     inputEmail: "Email",
@@ -160,6 +181,13 @@ export const messages = {
     errorPasswordMismatch: "Las dos contraseñas no coinciden.",
   },
   pt: {
+    buttonHome: "Início",
+    buttonSkins: "Aparência",
+    buttonHavenbags: "Saco de viagem",
+    buttonTools: "Barb'Ferramentas",
+    buttonDashboard: "Meu perfil",
+    buttonLogout: "Log out",
+
     titleLogin: "Login",
     descriptionLogin: "Boas vindas ao Barbofus !",
     inputEmail: "E-mail",

@@ -213,6 +213,11 @@
   );
 }
 
+/* Le repère triangulaire sous l'entrée de menu courante. */
+@utility nav-pointer {
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
 @utility heart-gradient {
   background-image: linear-gradient(
     45deg,
