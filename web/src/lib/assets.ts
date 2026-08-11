@@ -51,8 +51,13 @@ export const reseaux = [
     logo: `${BASE}/Logo_TikTok.png`,
   },
   {
+    // Le site actuel porte DEUX comptes Instagram : `barbe.douce.twitch` dans
+    // le bandeau partagé, et `barbe___douce` sur la page Réseaux, libellé
+    // « Tout neuf ». Le bon est `barbe___douce` — confirmé par Jimmy, et
+    // cohérent avec TikTok et Twitch qui portent le même pseudo. L'autre est
+    // un ancien compte que le PHP n'a jamais retiré ; on ne le reproduit pas.
     nom: "Instagram",
-    url: "https://www.instagram.com/barbe.douce.twitch/",
+    url: "https://www.instagram.com/barbe___douce/",
     logo: `${BASE}/Logo_Instagram.webp`,
   },
   {

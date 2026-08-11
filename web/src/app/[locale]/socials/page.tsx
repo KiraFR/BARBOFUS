@@ -24,9 +24,8 @@ export const metadata: Metadata = {
  * URL d'un réseau déjà déclaré dans `reseaux` (src/lib/assets.ts), pour ne
  * pas la recopier à la main quand elle correspond exactement à celle de la
  * page d'origine. Certains réseaux de la page d'origine pointent vers une
- * autre URL que celle de `reseaux` (Instagram, X, Discord) : ceux-là restent
- * écrits en dur plus bas, avec un commentaire, plutôt que d'être forcés dans
- * ce tableau.
+ * autre URL que celle de `reseaux` (X, Discord) : ceux-là restent écrits en
+ * dur plus bas, avec un commentaire, plutôt que d'être forcés dans ce tableau.
  */
 const urlReseau = (nom: (typeof reseaux)[number]["nom"]) =>
   reseaux.find((reseau) => reseau.nom === nom)!.url;
@@ -195,11 +194,7 @@ export default async function SocialsPage({ params }: { params: Promise<{ locale
             </p>
           </ReseauLien>
 
-          {/* Même remarque que pour X : l'original pointe vers
-              instagram.com/barbe___douce, alors que `reseaux` référence
-              instagram.com/barbe.douce.twitch — un compte différent. On garde
-              le lien exact de la page d'origine. */}
-          <ReseauLien href="https://www.instagram.com/barbe___douce/">
+          <ReseauLien href={urlReseau("Instagram")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
