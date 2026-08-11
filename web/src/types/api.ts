@@ -312,3 +312,50 @@ export interface SkinFilters {
 }
 
 export type SkinSort = "recent" | "popular" | "views" | "random";
+
+/* ---------------------------------------------------------------------------
+   Havre-sacs.
+
+   Seconde galerie du site, plus simple que celle des skins : une image, un
+   auteur, un titre facultatif, et un thème choisi parmi ceux du jeu.
+
+   Aucun endpoint n'existe pour elles non plus. Ces types décrivent ce que
+   devra rendre `GET /api/v1/haven-bags`, et sont calqués sur les requêtes de
+   `InfiniteHavenbagIndex` et `HavenbagIndexChunk`.
+--------------------------------------------------------------------------- */
+
+/**
+ * Un thème de havre-sac — un décor du jeu (Amakna, Brâkmar, Nowel...).
+ * Tables `haven_bag_themes` et `localized_haven_bag_themes`.
+ */
+export interface HavenBagTheme {
+  id: number;
+  /** Nom traduit dans la langue courante. C'est celui qu'on affiche. */
+  name: string;
+  /** Vignette du décor, montrée dans la colonne de filtres. URL absolue. */
+  image_path: string;
+}
+
+/**
+ * Un havre-sac partagé par un membre. Table `haven_bags`.
+ *
+ * La galerie n'a pas de page de détail : cliquer une carte ouvre une
+ * visionneuse et écrit `?show={id}` dans l'URL. Ce type porte donc tout ce
+ * qu'il faut pour la carte ET pour la visionneuse — il n'y a pas de seconde
+ * requête à faire.
+ */
+export interface HavenBag {
+  id: number;
+  /** Le titre est facultatif : beaucoup de havre-sacs sont publiés sans. */
+  name: string | null;
+  /** URL absolue de la capture. */
+  image_path: string;
+  /** Pseudo de l'auteur. */
+  user_name: string;
+  theme_name: string;
+  /**
+   * L'icône de « popoche » du thème : le petit objet qui sert de vignette à
+   * gauche du titre. Servie par static.barbofus.com, pas par /storage.
+   */
+  popocket_icon_path: string;
+}

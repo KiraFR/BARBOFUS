@@ -65,19 +65,12 @@ export function SiteFooter({ t, locale }: { t: Messages; locale: Locale }) {
             >
               Skinator
             </a>
-            <a
-              href="https://barbofus.com/havre-sacs"
-              title="Galerie de havre-sacs"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={lien(locale, "/havre-sacs")} title="Galerie de havre-sacs">
               {t.buttonHavenbags}
-            </a>
+            </Link>
             <Link href={lien(locale, "/outils")} title="Outils">
               {t.buttonTools}
             </Link>
-            {/* /mentions-legales n'existe pas encore côté front : la page
-                viendra plus tard, le lien est posé par avance. */}
             <Link href={lien(locale, "/mentions-legales")} title="Mentions légales">
               {t.buttonLegals}
             </Link>

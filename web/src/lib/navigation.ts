@@ -3,13 +3,13 @@ import type { Messages } from "@/messages";
 /**
  * Le site actuel, encore en production.
  *
- * Deux sections ne font pas partie de la refonte — le Skinator et les
- * havre-sacs — et restent servies par le Laravel existant. Les entrées de menu
- * correspondantes pointent donc dessus : on ne construit pas ces pages, mais
- * on ne les cache pas non plus, sinon le nouveau site paraîtrait amputé.
+ * Une seule section ne fait pas partie de la refonte — le Skinator — et reste
+ * servie par le Laravel existant. Son entrée de menu pointe donc dessus : on ne
+ * construit pas cette page, mais on ne la cache pas non plus, sinon le nouveau
+ * site paraîtrait amputé.
  *
- * Les Barb'Outils, eux, ont été repris : la page ne fait que présenter des
- * liens, elle ne coûtait presque rien.
+ * Les havre-sacs, eux, ont rejoint la refonte : seule leur page de publication
+ * reste sur l'ancien site, faute d'API pour recevoir une image.
  */
 const SITE_ACTUEL = "https://barbofus.com";
 
@@ -58,8 +58,7 @@ export function navigationVisiteur(): NavItem[] {
       titre: "Partage de skin",
     },
     {
-      href: `${SITE_ACTUEL}/havre-sacs`,
-      externe: true,
+      href: "/havre-sacs",
       emoji: "🏠",
       cle: "buttonHavenbags",
       titre: "Galerie de havre-sacs",
