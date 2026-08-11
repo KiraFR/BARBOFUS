@@ -58,6 +58,8 @@ export interface Filtres {
   natures: string[];
   types: string[];
   genres: Gender[];
+  /** Hexadécimal sans croisillon, en minuscules ; `null` si aucun filtre couleur. */
+  couleur: string | null;
 }
 
 const NATURES_TOUTES = NATURES.map((n) => n.valeur);
@@ -82,6 +84,12 @@ export function lireFiltres(params: Record<string, string | string[] | undefined
     .map(Number)
     .filter((g): g is Gender => g === 0 || g === 1);
 
+  // Même nom de paramètre que le site actuel (`color`), pour que les liens
+  // déjà partagés continuent de fonctionner. On ne garde la valeur que si
+  // c'est bien un hexadécimal à six chiffres, sans croisillon, en minuscules.
+  const couleurBrute = typeof params.color === "string" ? params.color.toLowerCase() : "";
+  const couleur = /^[0-9a-f]{6}$/.test(couleurBrute) ? couleurBrute : null;
+
   return {
     q: typeof params.q === "string" ? params.q : "",
     missSkin: params.missskin === "1",
@@ -90,6 +98,7 @@ export function lireFiltres(params: Record<string, string | string[] | undefined
     natures: groupe(params.nature, NATURES_TOUTES),
     types: groupe(params.type, TYPES_TOUS),
     genres: params.genre === undefined ? [...GENRES_TOUS] : genres,
+    couleur,
   };
 }
 
@@ -99,6 +108,58 @@ function normaliser(texte: string): string {
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "")
     .toLowerCase();
+}
+
+/**
+ * Tolérance de rapprochement des teintes, en degrés sur le cercle
+ * chromatique (0-360°). Le site actuel précalcule en base la teinte de
+ * chaque couleur de tenue et filtre dessus plutôt que de comparer les
+ * couleurs à l'identique — personne ne retrouverait un skin en cherchant un
+ * hexadécimal exact. On fait pareil ici, à la volée. ±20° est assez large
+ * pour retrouver un skin sans connaître sa nuance précise, et assez étroit
+ * pour ne pas mélanger deux familles de couleurs voisines (rouge/orange,
+ * bleu/violet...).
+ */
+const TOLERANCE_TEINTE = 20;
+
+/**
+ * Convertit un hexadécimal (sans croisillon) en teinte, en degrés [0, 360).
+ *
+ * Renvoie `null` pour une couleur sans teinte significative — gris, blanc ou
+ * noir, où la saturation est nulle (r = g = b). La teinte y est
+ * mathématiquement indéfinie ; plutôt que de laisser le calcul retomber
+ * silencieusement sur 0° (rouge), le cas est explicite et ces couleurs
+ * n'entrent jamais en correspondance avec un filtre de teinte — exactement
+ * ce que ferait une comparaison `BETWEEN` en base sur une colonne de teinte
+ * nulle.
+ */
+function teinte(hexSansCroisillon: string): number | null {
+  const hex = hexSansCroisillon.toLowerCase();
+  if (!/^[0-9a-f]{6}$/.test(hex)) return null;
+
+  const r = parseInt(hex.slice(0, 2), 16) / 255;
+  const g = parseInt(hex.slice(2, 4), 16) / 255;
+  const b = parseInt(hex.slice(4, 6), 16) / 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const delta = max - min;
+
+  if (delta === 0) return null; // Gris, blanc ou noir : pas de teinte.
+
+  let h: number;
+  if (max === r) h = ((g - b) / delta) % 6;
+  else if (max === g) h = (b - r) / delta + 2;
+  else h = (r - g) / delta + 4;
+
+  h *= 60;
+  return h < 0 ? h + 360 : h;
+}
+
+/** Écart entre deux teintes sur le cercle chromatique, entre 0° et 180°. */
+function ecartTeinte(a: number, b: number): number {
+  const diff = Math.abs(a - b) % 360;
+  return diff > 180 ? 360 - diff : diff;
 }
 
 export function filtrerSkins(skins: SkinCardItem[], filtres: Filtres): SkinCardItem[] {
@@ -135,6 +196,26 @@ export function filtrerSkins(skins: SkinCardItem[], filtres: Filtres): SkinCardI
 
     if (skin.gender !== null && !filtres.genres.includes(skin.gender)) {
       return false;
+    }
+
+    // Couleur : on retient le skin si l'une de ses quatre couleurs de tenue a
+    // une teinte proche de celle demandée. Une teinte cible indéfinie (gris,
+    // blanc, noir) ne peut correspondre à rien — voir le commentaire de
+    // `teinte` — donc un tel choix vide la galerie plutôt que de l'ignorer.
+    if (filtres.couleur) {
+      const cible = teinte(filtres.couleur);
+      const teintesTenue = [
+        skin.colors.cloth_1,
+        skin.colors.cloth_2,
+        skin.colors.cloth_3,
+        skin.colors.cloth_4,
+      ].map(teinte);
+
+      const correspond =
+        cible !== null &&
+        teintesTenue.some((t) => t !== null && ecartTeinte(t, cible) <= TOLERANCE_TEINTE);
+
+      if (!correspond) return false;
     }
 
     // « Les items peuvent être : » — un skin portant un item d'une nature

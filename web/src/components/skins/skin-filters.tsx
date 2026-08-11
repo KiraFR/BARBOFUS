@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, type ReactNode } from "react";
 
+import { ColorPicker } from "@/components/skins/color-picker";
 import { CLASSES, GENRES, NATURES, TYPES, type Filtres } from "@/lib/filtres";
 import { cn } from "@/lib/utils";
 import type { Messages } from "@/messages";
@@ -21,8 +22,8 @@ import type { Messages } from "@/messages";
  * de compte, et « Montilier » attend que l'API distingue ce type d'un familier
  * ordinaire. L'interface, elle, est complète.
  *
- * Le nuancier de couleurs n'est pas encore là : il s'appuiera sur les colonnes
- * de teinte précalculées en base, et mérite son propre écran de travail.
+ * Le filtre couleur compare des teintes, pas des couleurs à l'identique : le
+ * calcul vit dans `src/lib/filtres.ts`, à côté du reste du filtrage.
  */
 export function SkinFilters({ t, filtres }: { t: Messages; filtres: Filtres }) {
   const router = useRouter();
@@ -223,6 +224,21 @@ export function SkinFilters({ t, filtres }: { t: Messages; filtres: Filtres }) {
               </option>
             ))}
           </select>
+
+          {/* Couleur. Même nom de paramètre que le site actuel (`color`),
+          voir src/lib/filtres.ts pour le calcul de teinte. */}
+          <Groupe titre={t.filterColors}>
+            <ColorPicker
+              libelle={t.filterColors}
+              valeur={filtres.couleur}
+              onChange={(hex) =>
+                appliquer((p) => {
+                  if (hex) p.set("color", hex);
+                  else p.delete("color");
+                })
+              }
+            />
+          </Groupe>
 
           <Groupe titre="">
             {GENRES.map((genre) => (
