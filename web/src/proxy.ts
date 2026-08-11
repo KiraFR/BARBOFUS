@@ -41,6 +41,22 @@ function langueDemandee(request: NextRequest): Locale {
   return (trouvee?.code as Locale) ?? defaultLocale;
 }
 
+/**
+ * Les URL du site actuel qui changent de nom.
+ *
+ * La galerie principale vit aujourd'hui sur `/unity-skins`, l'ancienne galerie
+ * Dofus 2 occupant `/skins`. Dofus 2 n'existant plus, `/skins` se libère et
+ * revient à la galerie principale, qui y gagne une URL plus courte.
+ *
+ * Ces redirections sont permanentes (308) : c'est ce qui transfère aux
+ * nouvelles adresses le référencement accumulé par les anciennes. Sans elles,
+ * des années de visibilité partiraient à la poubelle le jour de la bascule.
+ */
+const ANCIENNES_URL: { motif: RegExp; versChemin: (m: RegExpMatchArray) => string }[] = [
+  { motif: /^\/unity-skins\/?$/, versChemin: () => "/skins" },
+  { motif: /^\/unity-skin\/(\d+)\/?$/, versChemin: (m) => `/skin/${m[1]}` },
+];
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -51,6 +67,15 @@ export function proxy(request: NextRequest) {
 
   const locale = langueDemandee(request);
   const url = request.nextUrl.clone();
+
+  for (const ancienne of ANCIENNES_URL) {
+    const trouve = pathname.match(ancienne.motif);
+    if (trouve) {
+      url.pathname = `/${locale}${ancienne.versChemin(trouve)}`;
+      return NextResponse.redirect(url, 308);
+    }
+  }
+
   url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
   return NextResponse.redirect(url);
 }
