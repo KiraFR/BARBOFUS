@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { Profil } from "@/components/compte/profil";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { images } from "@/lib/assets";
 import { utilisateurCourant } from "@/lib/auth";
+import { dateRelative } from "@/lib/dates";
 import { skins } from "@/lib/fixtures/skins";
 import { getMessages, type Locale } from "@/messages";
 
@@ -21,19 +23,29 @@ export const metadata: Metadata = {
  * `cawotte_wins`, ...) que l'API ne sert pas encore.
  *
  * Le nombre de skins postés est calculé plus bas depuis les fixtures — c'est
- * la seule valeur ici qui reflète vraiment l'utilisateur connecté. Les trois
- * autres sont des valeurs FIGÉES à 0, en attendant que l'API fournisse :
- *   - le nombre de favoris donnés / reçus (`like_given` / `like_received`
- *     côté modèle `User`) ;
- *   - le total de skins du site (`Skin::count() + UnitySkin::count()`) ;
- *   - le nombre de victoires Miss'Skin (`ocre_wins + emerald_wins +
- *     cawotte_wins`, trois compteurs fusionnés en un seul ici faute de
- *     maquette détaillée).
+ * la seule valeur ici qui reflète vraiment l'utilisateur connecté. Les autres
+ * sont FIGÉES à 0, en attendant que l'API fournisse `like_given` et
+ * `like_received`.
+ *
+ * Le total de skins du site (`Skin::count() + UnitySkin::count()`) n'est pas
+ * affiché : sur le site actuel il est réservé aux modérateurs et aux
+ * administrateurs, et nous n'avons pas encore de rôles.
  */
 const FAVORIS_DONNES_FIGE = 0;
 const FAVORIS_RECUS_FIGE = 0;
-const TOTAL_SKINS_SITE_FIGE = 0;
-const VICTOIRES_MISS_SKIN_FIGEE = 0;
+
+/**
+ * Les victoires Miss'Skin, une par Dofus mis en jeu.
+ *
+ * Le site en tient trois compteurs séparés (`ocre_wins`, `emerald_wins`,
+ * `cawotte_wins`), affichés côte à côte avec l'image du Dofus correspondant.
+ * Les nombres sont figés à zéro faute d'API.
+ */
+const VICTOIRES = [
+  { dofus: "ocre", image: images.dofusOcre, nombre: 0 },
+  { dofus: "emeraude", image: images.dofusEmeraude, nombre: 0 },
+  { dofus: "cawotte", image: images.dofusCawotte, nombre: 0 },
+] as const;
 
 /** Classes communes au sous-titre de chaque section, et à son trait. */
 const TITRE_SECTION = "font-thin text-3xl min-[800px]:text-4xl uppercase";
@@ -53,9 +65,8 @@ export default async function MonComptePage({ params }: { params: Promise<{ loca
 
   const skinsPostes = skins.filter((skin) => skin.user.id === utilisateur.id).length;
 
-  const inscritLe = utilisateur.created_at
-    ? new Date(utilisateur.created_at).toLocaleDateString(locale)
-    : null;
+  // Le site affiche un écart — « il y a 1 an » — et non une date absolue.
+  const inscritLe = dateRelative(utilisateur.created_at, locale);
 
   return (
     <div className="flex w-[80%] flex-col gap-x-16 gap-y-16 min-[800px]:mx-auto min-[1500px]:flex-row">
@@ -84,16 +95,32 @@ export default async function MonComptePage({ params }: { params: Promise<{ loca
                 <span className="font-normal tracking-widest italic">{FAVORIS_RECUS_FIGE}</span>{" "}
                 {t.contentFavoritesReceived}
               </p>
-              <p>
-                <span className="font-normal tracking-widest italic">{TOTAL_SKINS_SITE_FIGE}</span>{" "}
-                {t.contentTotalSkins}
-              </p>
-              <p>
-                <span className="font-normal tracking-widest italic">
-                  {VICTOIRES_MISS_SKIN_FIGEE}
-                </span>{" "}
-                {t.contentVictory}
-              </p>
+              {/* Le total de skins du site n'apparaît QUE pour les modérateurs
+                  et les administrateurs sur le site actuel. Sans notion de
+                  rôle ici, on ne l'affiche pas plutôt que de le montrer à
+                  tout le monde. */}
+            </div>
+
+            {/* Les victoires Miss'Skin : une ligne par Dofus, avec son image.
+                Trois compteurs distincts, pas un total — c'est la présentation
+                du site actuel. */}
+            <div className="flex flex-col gap-y-4">
+              {VICTOIRES.map((victoire) => (
+                <div key={victoire.dofus} className="flex items-center gap-x-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={victoire.image}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="h-12"
+                  />
+                  <p>
+                    <span className="font-normal tracking-widest italic">{victoire.nombre}</span>{" "}
+                    {t.contentVictory}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

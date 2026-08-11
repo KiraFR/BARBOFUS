@@ -37,17 +37,21 @@ export default async function CompteLayout({
   const t = getMessages(locale);
 
   return (
-    <main className="mx-auto w-[min(100%-2rem,75rem)] flex-1 py-10">
-      <h1 className="font-display text-gold-text text-center text-4xl uppercase">
-        {t.titleMyAccount}
-      </h1>
-      <p className="text-inactive mt-2 mb-10 text-center text-xl font-thin">
-        {t.descriptionMyAccount}
-      </p>
-
+    // Les onglets à gauche, le contenu à droite — la disposition du site
+    // actuel. Le titre est au-dessus du contenu seul, pas de la page entière.
+    <main className="mx-auto mt-20 mb-10 flex w-full flex-1 gap-x-2 min-[400px]:px-6 min-[1550px]:pl-[5vw]">
       <CompteTabs t={t} locale={locale} />
 
-      <div className="mt-10">{children}</div>
+      <div className="min-w-0 flex-1">
+        <h1 className="font-display text-gold-text text-center text-4xl uppercase">
+          {t.titleMyAccount}
+        </h1>
+        <p className="text-inactive mt-2 mb-10 text-center text-xl font-thin">
+          {t.descriptionMyAccount}
+        </p>
+
+        {children}
+      </div>
     </main>
   );
 }
