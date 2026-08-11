@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { ENTETE_LOCALE } from "@/lib/entetes";
 import { defaultLocale, locales, type Locale } from "@/messages";
 
 /**
@@ -60,10 +61,20 @@ const ANCIENNES_URL: { motif: RegExp; versChemin: (m: RegExpMatchArray) => strin
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const aDejaUneLangue = locales.some(
+  const langueDeLUrl = locales.find(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );
-  if (aDejaUneLangue) return;
+
+  if (langueDeLUrl) {
+    // La langue est recopiée dans un en-tête de requête pour les rares écrans
+    // que Next rend sans leur passer `params` — la page 404 en particulier,
+    // qui doit malgré tout s'afficher dans la bonne langue. Voir
+    // `src/lib/locale-serveur.ts`.
+    const entetes = new Headers(request.headers);
+    entetes.set(ENTETE_LOCALE, langueDeLUrl);
+
+    return NextResponse.next({ request: { headers: entetes } });
+  }
 
   const locale = langueDemandee(request);
   const url = request.nextUrl.clone();

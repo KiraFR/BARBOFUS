@@ -3,11 +3,13 @@ import { notFound } from "next/navigation";
 import { LocaleSwitcher } from "@/components/layout/locale-switcher";
 import { MainNav } from "@/components/layout/main-nav";
 import { Notifications } from "@/components/layout/notifications";
+import { PopupMissSkin } from "@/components/layout/popup-miss-skin";
 import { PromoBanner } from "@/components/layout/promo-banner";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { estConnecte } from "@/lib/auth";
+import { chargerThemeMissSkin } from "@/lib/miss-skin";
 import { estLocale, getMessages } from "@/messages";
 
 /**
@@ -16,6 +18,10 @@ import { estLocale, getMessages } from "@/messages";
  *
  * Équivaut à `layouts/app` côté Laravel. Le planning et les récompenses ne
  * passent pas par ici — voir `(ecran)/layout.tsx`.
+ *
+ * La page 404, elle, passe bien par ici : l'attrape-tout `[...introuvable]` la
+ * ramène dans ce groupe précisément pour qu'elle garde le menu et le pied de
+ * page. Un visiteur qui se trompe d'adresse doit avoir de quoi repartir.
  */
 export default async function SiteLayout({
   children,
@@ -36,7 +42,7 @@ export default async function SiteLayout({
 
   // L'état de connexion est lu côté serveur : le menu est donc juste dès le
   // premier rendu, sans clignotement entre « visiteur » et « membre ».
-  const connecte = await estConnecte();
+  const [connecte, themeMissSkin] = await Promise.all([estConnecte(), chargerThemeMissSkin()]);
 
   return (
     <>
@@ -46,6 +52,9 @@ export default async function SiteLayout({
       {/* La cloche n'existe que pour un membre connecté, comme sur le site. */}
       {connecte ? <Notifications locale={locale} /> : null}
       <MainNav t={t} locale={locale} connecte={connecte} />
+      {/* Posée dans l'habillage, comme `layouts/basic-views` côté Laravel :
+          elle peut donc s'ouvrir depuis n'importe quelle page du site. */}
+      <PopupMissSkin t={t} locale={locale} theme={themeMissSkin} />
       {children}
       <ScrollToTop />
       <SiteFooter t={t} locale={locale} />

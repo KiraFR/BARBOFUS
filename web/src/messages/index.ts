@@ -145,6 +145,14 @@ export const messages = {
     sortBreeds: "Classes",
     sortMostViewed: "Les plus vues",
 
+    popupMissSkinTitle: "Miss'Skin - Thème : ",
+    popupMissSkinContent:
+      "Le concours Miss'Skin commence ! Tous les <strong>mardis de 7h00 à 11h30</strong>, postez vos plus beaux skins via le <strong><a href=\"/skinator\" class=\"text-goldText hover:text-goldTextLit\">Skinator</a></strong> pour participer.<br><br><strong class=\"text-lg\">📋 Règles :</strong><br>• Utilisez le pseudo de compte Ankama dans le nom du skin, au format : <em>VotrePseudo#0000</em><br>• Choisissez votre récompense sur la page <strong><a href=\"/recompenses\" class=\"text-goldText hover:text-goldTextLit\">Récompenses</a></strong><br>• Le concours se déroule sur <strong>Twitch</strong> où les viewers éliront le top 3<br>• Une même personne ne peut gagner de récompense qu'une fois par mois<br><br><strong class=\"text-lg\">💡 Conseils :</strong><br>• Liez votre Discord dans \"Mon compte\" pour être contacté au besoin<br>• Le choix des récompenses est remis à zéro chaque mardi, pensez à les sélectionner de nouveau",
+
+    contentLost: "Oups !",
+    content404: "On a cherché partout… mais cette page est aussi introuvable qu’un objet dans l’inventaire de Skyrim.",
+    contentError: "Erreur",
+
     contentRefineSearch: "Affine ta recherche",
     contentSet: "Activé",
     contentUnset: "Inactif",
@@ -330,6 +338,14 @@ export const messages = {
     sortBreeds: "Classes",
     sortMostViewed: "Most viewed",
 
+    popupMissSkinTitle: "Miss'Skin - Theme: ",
+    popupMissSkinContent:
+      "The Miss'Skin contest begins! Every <strong>Tuesday from 7:00 AM to 11:30 AM</strong>, post your most beautiful skins via the <strong><a href=\"/skinator\" class=\"text-goldText hover:text-goldTextLit\">Skinator</a></strong> to participate.<br><br><strong class=\"text-lg\">📋 Rules:</strong><br>• Use your Ankama account username in the skin name, format: <em>YourUsername#0000</em><br>• Choose your reward on the <strong><a href=\"/recompenses\" class=\"text-goldText hover:text-goldTextLit\">Rewards</a></strong> page<br>• The contest takes place on <strong>Twitch</strong> where viewers will elect the top 3<br>• The same person can only win a reward once per month<br><br><strong class=\"text-lg\">💡 Tips:</strong><br>• Link your Discord in \"My Account\" to be contacted if needed<br>• Reward choices are reset every Tuesday, remember to select them again",
+
+    contentLost: "Oops !",
+    content404: "We searched high and low… but this page is as lost as your socks in the laundry.",
+    contentError: "Error",
+
     contentRefineSearch: "Refine your search",
     contentSet: "Set",
     contentUnset: "Unset",
@@ -510,6 +526,14 @@ export const messages = {
     sortRewards: "Recompensas",
     sortBreeds: "Clases",
     sortMostViewed: "Los más vistos",
+
+    popupMissSkinTitle: "Miss'Skin - Tema: ",
+    popupMissSkinContent:
+      "¡El concurso Miss'Skin comienza! Todos los <strong>martes de 7:00 AM a 11:30 AM</strong>, publica tus skins más hermosas a través del <strong><a href=\"/skinator\" class=\"text-goldText hover:text-goldTextLit\">Skinator</a></strong> para participar.<br><br><strong class=\"text-lg\">📋 Reglas:</strong><br>• Usa tu nombre de usuario de cuenta Ankama en el nombre de la skin, formato: <em>TuUsuario#0000</em><br>• Elige tu recompensa en la página de <strong><a href=\"/recompenses\" class=\"text-goldText hover:text-goldTextLit\">Recompensas</a></strong><br>• El concurso se lleva a cabo en <strong>Twitch</strong> donde los espectadores elegirán el top 3<br>• Una misma persona solo puede ganar una recompensa una vez al mes<br><br><strong class=\"text-lg\">💡 Consejos:</strong><br>• Vincula tu Discord en \"Mi Cuenta\" para ser contactado si es necesario<br>• Las opciones de recompensas se reinician cada martes, recuerda seleccionarlas de nuevo",
+
+    contentLost: "¡Vaya!",
+    content404: "Buscamos por todas partes… pero esta página está tan perdida como tus calcetines en la lavadora.",
+    contentError: "Error",
 
     contentRefineSearch: "Filtros",
     contentSet: "Activos",
@@ -694,6 +718,14 @@ export const messages = {
     sortRewards: "Recompensas",
     sortBreeds: "Classes",
     sortMostViewed: "Mais vistos",
+
+    popupMissSkinTitle: "Miss'Aparência - Tema: ",
+    popupMissSkinContent:
+      "O concurso Miss'Aparência começou! Toda <strong>terça-feira das 7:00 às 11:30</strong>, poste suas aparências mais bonitas através do <strong><a href=\"/skinator\" class=\"text-goldText hover:text-goldTextLit\">Skinator</a></strong> para participar.<br><br><strong class=\"text-lg\">📋 Regras:</strong><br>• Use seu nome de usuário da conta Ankama no nome da aparência, formato: <em>SeuUsuário#0000</em><br>• Escolha sua recompensa na página de <strong><a href=\"/recompenses\" class=\"text-goldText hover:text-goldTextLit\">Recompensas</a></strong><br>• O concurso acontece na <strong>Twitch</strong> onde os viewers elegem o top 3<br>• Uma mesma pessoa só pode ganhar uma recompensa uma vez por mês<br><br><strong class=\"text-lg\">💡 Dicas:</strong><br>• Vincule seu Discord em \"Minha Conta\" para ser contatado se necessário<br>• As escolhas de recompensas são reiniciadas toda terça-feira, lembre-se de selecioná-las novamente",
+
+    contentLost: "Ops!",
+    content404: "Procuramos em todos os lugares… mas esta página está tão perdida quanto suas meias na lavanderia.",
+    contentError: "Erro",
 
     contentRefineSearch: "Refine sua busca",
     contentSet: "Marcar",
