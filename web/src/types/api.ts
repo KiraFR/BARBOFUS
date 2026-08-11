@@ -262,6 +262,29 @@ export interface SkinDetail {
  */
 export interface SkinCardItem extends SkinDetail {
   total_views: number;
+
+  /** Nombre de likes reçus. */
+  likes_count: number;
+  /** Le visiteur a-t-il liké ce skin ? `false` s'il n'est pas connecté. */
+  liked_by_me: boolean;
+  /** Le visiteur l'a-t-il mis en favori ? */
+  favorited_by_me: boolean;
+
+  /** Statut de modération. Sert au filtre « vainqueurs du Miss'Skin ». */
+  status: SkinStatus;
+
+  /**
+   * Les deux couleurs de guilde.
+   *
+   * Elles existent en base (`unity_skins.color_guild_1/2`) mais
+   * `/api/skin/{id}` ne les rend pas : l'endpoint de galerie devra les
+   * ajouter. Regroupées ici plutôt que dans `SkinColors`, qui décrit la forme
+   * réellement servie par l'API et ne doit pas prétendre les contenir.
+   */
+  colors_guild: {
+    guild_1: HexSansCroisillon;
+    guild_2: HexSansCroisillon;
+  };
 }
 
 /**

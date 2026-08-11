@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { TwitchLiveAvatar } from "@/components/layout/twitch-live";
 import { images, reseaux, storageUrl } from "@/lib/assets";
 import { alternatesPour } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -88,33 +89,10 @@ export default async function SocialsPage({ params }: { params: Promise<{ locale
     // plutôt que de reproduire ce calcul devenu sans objet.
     <main className="flex w-full flex-1 items-center justify-center bg-black/10 px-2 py-16">
       <div className="border-ivory/10 bg-anthracite mx-auto flex w-[min(26rem,100vw)] flex-col items-center rounded-xl border p-8 px-2 shadow-2xl min-[500px]:px-8">
-        {/* Logo */}
-        <a
-          href={urlReseau("Twitch")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="gold-gradient relative inline-flex aspect-square items-center justify-center rounded-full p-1 shadow-xl"
-        >
-          {/* Le halo doré et le badge LIVE de l'original changent d'état en
-              JS (appel à decapi.me toutes les 30 secondes pour savoir si le
-              stream est en direct). Cette page étant un composant serveur
-              statique, ce comportement n'est pas reproduit : on garde le
-              halo doré, sans le badge « LIVE » qui serait trompeur s'il
-              restait affiché en permanence. */}
-          <span
-            aria-hidden="true"
-            className="gold-gradient absolute inset-0 rounded-full opacity-40 blur-xl"
-          />
-          <div className="bg-anthracite relative flex h-[9.5rem] w-full items-center justify-center rounded-full p-7">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={storageUrl("images/misc_ui/barbed_pp1.png")}
-              alt=""
-              aria-hidden="true"
-              className="absolute h-full max-w-full rounded-full p-2"
-            />
-          </div>
-        </a>
+        {/* Logo — halo doré et badge « LIVE » quand Barbe Douce est en
+            direct (vérifié auprès de decapi.me toutes les 30 secondes),
+            halo « cœur » sinon. Voir src/components/layout/twitch-live.tsx. */}
+        <TwitchLiveAvatar />
 
         {/* Présentation */}
         <h2 className="mt-4 text-[2rem] tracking-wider">BARBE DOUCE</h2>

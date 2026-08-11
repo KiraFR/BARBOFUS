@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { GalleryToolbar } from "@/components/skins/gallery-toolbar";
 import { SkinCard } from "@/components/skins/skin-card";
 import { SkinFilters } from "@/components/skins/skin-filters";
+import { estConnecte } from "@/lib/auth";
 import { filtrerSkins, lireFiltres } from "@/lib/filtres";
 import { skins } from "@/lib/fixtures/skins";
 import { alternatesPour } from "@/lib/seo";
@@ -36,6 +37,7 @@ export default async function SkinsPage({
   const { locale } = await params;
   const requete = await searchParams;
   const t = getMessages(locale);
+  const connecte = await estConnecte();
 
   const sortDemande = typeof requete.sort === "string" ? requete.sort : undefined;
   const tri = estCodeTri(sortDemande) ? sortDemande : TRI_DEFAUT;
@@ -58,7 +60,7 @@ export default async function SkinsPage({
              ligne qui s'adapte, jamais leur taille. */
           <div className="mx-auto grid w-[min(100%,93rem)] grid-cols-[repeat(auto-fill,13.125rem)] justify-center gap-x-8 gap-y-16 px-4 pt-[4.5rem]">
             {liste.map((skin) => (
-              <SkinCard key={skin.id} skin={skin} locale={locale} />
+              <SkinCard key={skin.id} skin={skin} locale={locale} connecte={connecte} />
             ))}
           </div>
         )}

@@ -20,11 +20,26 @@ export const NATURES = [
   { valeur: "mimisymbic", cle: "filterItemMimibiotable" },
 ] as const;
 
-/** Les types d'items montrables, sur `category`. */
+/**
+ * Les types d'items montrables, sur `category`.
+ *
+ * « Montilier » désigne un familier chevauchable. L'API ne l'expose pas comme
+ * une catégorie distincte : la case est donc là et fonctionne, mais aucun item
+ * ne porte encore cette catégorie, donc la décocher ne retire rien. À relier
+ * quand l'endpoint distinguera les deux.
+ */
 export const TYPES = [
   { valeur: "pet", cle: "filterTypePet" },
+  { valeur: "mountable", cle: "filterTypeMountable" },
   { valeur: "mount", cle: "filterTypeMount" },
 ] as const;
+
+/**
+ * L'identifiant du compte de Barbe Douce, pour le filtre « voir uniquement ses
+ * skins ». Inconnu tant que l'API ne l'expose pas : le filtre fonctionne, mais
+ * ne renverra rien avant qu'on renseigne la bonne valeur.
+ */
+export const ID_BARBE_DOUCE: number | null = null;
 
 export const GENRES = [
   { valeur: 0, cle: "filterGenderMale" },
@@ -34,6 +49,10 @@ export const GENRES = [
 export interface Filtres {
   /** Recherche libre : nom de skin, pseudo d'auteur, ou nom d'item. */
   q: string;
+  /** N'afficher que les skins vainqueurs du concours Miss'Skin. */
+  missSkin: boolean;
+  /** N'afficher que les skins publiés par Barbe Douce. */
+  barbeDouce: boolean;
   /** Noms de classes retenues. Vide = toutes. */
   classes: string[];
   natures: string[];
@@ -65,6 +84,8 @@ export function lireFiltres(params: Record<string, string | string[] | undefined
 
   return {
     q: typeof params.q === "string" ? params.q : "",
+    missSkin: params.missskin === "1",
+    barbeDouce: params.barbedouce === "1",
     classes: liste(params.classe),
     natures: groupe(params.nature, NATURES_TOUTES),
     types: groupe(params.type, TYPES_TOUS),
@@ -91,6 +112,16 @@ export function filtrerSkins(skins: SkinCardItem[], filtres: Filtres): SkinCardI
         [skin.name ?? "", skin.user.name, ...items.map((i) => i.name)].join(" "),
       );
       if (!cible.includes(recherche)) return false;
+    }
+
+    if (filtres.missSkin && skin.status !== "MissSkin") {
+      return false;
+    }
+
+    // Sans identifiant renseigné, ce filtre ne retient rien : c'est visible
+    // plutôt que silencieux, et ça se règle en remplissant ID_BARBE_DOUCE.
+    if (filtres.barbeDouce && skin.user.id !== ID_BARBE_DOUCE) {
+      return false;
     }
 
     // Comparaison normalisée : le sélecteur affiche « Féca » quand l'API rend

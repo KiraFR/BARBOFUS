@@ -26,7 +26,8 @@ export function GrilleSkins({
   return (
     <div className="mx-auto grid grid-cols-[repeat(auto-fill,13.125rem)] justify-center gap-x-8 gap-y-16">
       {skins.map((skin) => (
-        <SkinCard key={skin.id} skin={skin} locale={locale} />
+        // Dans l'espace membre, le visiteur est connecte par construction.
+        <SkinCard key={skin.id} skin={skin} locale={locale} connecte />
       ))}
     </div>
   );

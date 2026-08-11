@@ -36,7 +36,15 @@ export function GoldBand({ children, className }: { children: ReactNode; classNa
  * à hydrater — et l'animation s'arrête au survol pour laisser le temps de
  * cliquer sur une carte.
  */
-export function HomeCarousel({ skins, locale }: { skins: SkinCardItem[]; locale: Locale }) {
+export function HomeCarousel({
+  skins,
+  locale,
+  connecte,
+}: {
+  skins: SkinCardItem[];
+  locale: Locale;
+  connecte: boolean;
+}) {
   const doublee = [...skins, ...skins];
 
   return (
@@ -50,6 +58,7 @@ export function HomeCarousel({ skins, locale }: { skins: SkinCardItem[]; locale:
               key={`${skin.id}-${index}`}
               skin={skin}
               locale={locale}
+              connecte={connecte}
               className="aspect-14/19 h-full w-auto shrink-0"
             />
           ))}

@@ -258,12 +258,35 @@ export function SkinDetail({
           })}
         </ul>
 
-        {/* Les couleurs de guilde ne sont pas rendues par l'endpoint dont ces
-            fixtures sont extraites — voir le commentaire sur `COULEURS`
-            ci-dessus. */}
-        <p className="text-inactive mt-4 text-xs italic">
-          Couleurs de guilde non disponibles : l&apos;API ne les fournit pas encore.
-        </p>
+        {/* Les couleurs de guilde. Elles existent en base mais pas dans la
+            réponse de `/api/skin/{id}` : les valeurs affichées ici sont des
+            remplaçantes, reprises des couleurs de tenue du skin. La mise en
+            page, elle, est définitive. */}
+        <h3 className="font-display text-ivory mt-10 mb-4 text-xl">Couleurs de guilde</h3>
+
+        <ul className="flex flex-wrap gap-6">
+          {(
+            [
+              { cle: "guild_1", libelle: "Guilde 1" },
+              { cle: "guild_2", libelle: "Guilde 2" },
+            ] as const
+          ).map(({ cle, libelle }) => {
+            const hex = `#${skin.colors_guild[cle]}`;
+
+            return (
+              <li key={cle} className="flex flex-col items-center gap-y-1">
+                <span
+                  role="img"
+                  aria-label={`${libelle} : ${hex}`}
+                  style={{ backgroundColor: hex }}
+                  className="border-ivory h-12 w-12 rounded-md border-2"
+                />
+                <p className="text-ivory text-xs font-thin">{libelle}</p>
+                <p className="text-inactive text-xs uppercase">{hex}</p>
+              </li>
+            );
+          })}
+        </ul>
       </section>
     </main>
   );

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { LikeButton } from "@/components/skins/like-button";
 import { storageUrl } from "@/lib/assets";
 import { cn } from "@/lib/utils";
 import { lien, type Locale } from "@/messages";
@@ -30,10 +31,13 @@ import type { SkinCardItem } from "@/types/api";
 export function SkinCard({
   skin,
   locale,
+  connecte,
   className,
 }: {
   skin: SkinCardItem;
   locale: Locale;
+  /** Un visiteur non connecte voit le coeur, mais il le renvoie a la connexion. */
+  connecte: boolean;
   /**
    * Pour changer la façon dont la carte est dimensionnée. La galerie s'en
    * passe ; le carrousel de l'accueil s'en sert, ses cartes étant réglées par
@@ -55,6 +59,14 @@ export function SkinCard({
           {skin.name}
         </p>
       ) : null}
+
+      <LikeButton
+        skinId={skin.id}
+        likes={skin.likes_count}
+        likeParMoi={skin.liked_by_me}
+        connecte={connecte}
+        locale={locale}
+      />
 
       <Link
         href={lien(locale, `/skin/${skin.id}`)}

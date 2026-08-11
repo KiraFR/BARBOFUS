@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { LocaleSwitcher } from "@/components/layout/locale-switcher";
 import { estConnecte } from "@/lib/auth";
 import { MainNav } from "@/components/layout/main-nav";
+import { Notifications } from "@/components/layout/notifications";
 import { PromoBanner } from "@/components/layout/promo-banner";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -78,6 +79,8 @@ export default async function RootLayout({
         <PromoBanner />
         <SiteHeader locale={locale} />
         <LocaleSwitcher locale={locale} />
+        {/* La cloche n'existe que pour un membre connecté, comme sur le site. */}
+        {connecte ? <Notifications locale={locale} /> : null}
         <MainNav t={t} locale={locale} connecte={connecte} />
         {children}
         <ScrollToTop />

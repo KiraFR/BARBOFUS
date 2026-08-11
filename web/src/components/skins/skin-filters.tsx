@@ -16,11 +16,10 @@ import type { Messages } from "@/messages";
  * pas partageable. Ici tout y est — c'est de toute façon nécessaire pour que
  * la page se rende côté serveur.
  *
- * Trois filtres sont présents mais inactifs, faute de données dans l'API :
- * les vainqueurs Miss'Skin et les skins de Barbe Douce demandent le statut et
- * l'auteur de référence, et « Montilier » n'est pas distinguable d'un familier
- * dans ce que l'API renvoie. Ils sont désactivés et le disent, plutôt que de
- * faire semblant.
+ * Tous les filtres sont actifs. Deux d'entre eux ne rendront cependant leur
+ * plein effet qu'avec l'API : « skins de Barbe Douce » attend son identifiant
+ * de compte, et « Montilier » attend que l'API distingue ce type d'un familier
+ * ordinaire. L'interface, elle, est complète.
  *
  * Le nuancier de couleurs n'est pas encore là : il s'appuiera sur les colonnes
  * de teinte précalculées en base, et mérite son propre écran de travail.
@@ -39,6 +38,14 @@ export function SkinFilters({ t, filtres }: { t: Messages; filtres: Filtres }) {
     modifier(suivants);
     const requete = suivants.toString();
     router.push(requete ? `${pathname}?${requete}` : pathname, { scroll: false });
+  }
+
+  /** Active ou désactive un filtre à deux états, écrit dans l'URL en « 1 ». */
+  function basculerDrapeau(nom: string, actif: boolean) {
+    appliquer((p) => {
+      if (actif) p.delete(nom);
+      else p.set(nom, "1");
+    });
   }
 
   /**
@@ -144,10 +151,20 @@ export function SkinFilters({ t, filtres }: { t: Messages; filtres: Filtres }) {
             />
           </div>
 
-          <Indisponible t={t}>
-            <Case coche={false} onChange={() => {}} libelle={t.filterMissSkinOnly} desactive />
-            <Case coche={false} onChange={() => {}} libelle={t.filterBarbeDouceOnly} desactive />
-          </Indisponible>
+          <div className="flex flex-col gap-y-2">
+            <Case
+              coche={filtres.missSkin}
+              onChange={() => basculerDrapeau("missskin", filtres.missSkin)}
+              libelle={t.filterMissSkinOnly}
+            />
+            {/* Ce filtre fonctionne mais ne retiendra rien tant que
+                ID_BARBE_DOUCE n'est pas renseigné — voir src/lib/filtres.ts. */}
+            <Case
+              coche={filtres.barbeDouce}
+              onChange={() => basculerDrapeau("barbedouce", filtres.barbeDouce)}
+              libelle={t.filterBarbeDouceOnly}
+            />
+          </div>
         </div>
 
         <div className="flex flex-col gap-y-5">
@@ -185,9 +202,6 @@ export function SkinFilters({ t, filtres }: { t: Messages; filtres: Filtres }) {
                 libelle={t[type.cle]}
               />
             ))}
-            <Indisponible t={t}>
-              <Case coche={false} onChange={() => {}} libelle={t.filterTypeMountable} desactive />
-            </Indisponible>
           </Groupe>
 
           {/* Classe. Le site actuel écrit déjà ce filtre dans l'URL sous `classe`,
@@ -244,37 +258,20 @@ function Groupe({ titre, children }: { titre: string; children: ReactNode }) {
   );
 }
 
-/** Enveloppe les filtres que l'API ne permet pas encore de servir. */
-function Indisponible({ t, children }: { t: Messages; children: ReactNode }) {
-  return (
-    <div title={t.filterUnavailable} className="flex flex-col gap-y-2 opacity-40">
-      {children}
-    </div>
-  );
-}
-
 function Case({
   coche,
   onChange,
   libelle,
-  desactive,
 }: {
   coche: boolean;
   onChange: () => void;
   libelle: string;
-  desactive?: boolean;
 }) {
   return (
-    <label
-      className={cn(
-        "flex items-center gap-x-1.5 font-thin",
-        desactive ? "text-inactive cursor-not-allowed" : "text-ivory cursor-pointer",
-      )}
-    >
+    <label className="text-ivory flex cursor-pointer items-center gap-x-1.5 font-thin">
       <input
         type="checkbox"
         checked={coche}
-        disabled={desactive}
         onChange={onChange}
         className="accent-gold-text size-4 cursor-[inherit]"
       />

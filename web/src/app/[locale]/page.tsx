@@ -9,6 +9,8 @@ import {
   Socials,
   Translators,
 } from "@/components/home/home-sections";
+import { TwitchLive } from "@/components/layout/twitch-live";
+import { estConnecte } from "@/lib/auth";
 import { skins } from "@/lib/fixtures/skins";
 import { texteEnrichi } from "@/lib/texte";
 import { alternatesPour } from "@/lib/seo";
@@ -33,6 +35,7 @@ const TWITCH = "https://www.twitch.tv/barbe___douce";
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   const t = getMessages(locale);
+  const connecte = await estConnecte();
 
   return (
     <main className="w-full flex-1">
@@ -41,7 +44,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       </h1>
       <h2 className="mt-2 mb-8 text-center text-2xl font-thin uppercase">{t.descriptionHome}</h2>
 
-      <HomeCarousel skins={skins.slice(0, 10)} locale={locale} />
+      <HomeCarousel skins={skins.slice(0, 10)} locale={locale} connecte={connecte} />
 
       <GoldBand className="mt-28 h-[20rem] min-[800px]:h-48">
         <HomeActions locale={locale} libelleGalerie={t.buttonSkinExplore} />
@@ -54,21 +57,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       <h3 className="-mt-2 mb-8 text-center text-2xl font-thin uppercase">{t.descriptionBarbe}</h3>
 
       {/*
-        Le site intègre ici le lecteur Twitch en direct. Il n'est pas porté :
-        c'est un script tiers, et le même composant sert dans la colonne de la
-        galerie — autant le faire une seule fois, plus tard. En attendant, un
-        lien vers la chaîne, qui remplit la même fonction.
+        Indicateur de direct Twitch (pastille, texte Stream OFF/ON, lien vers
+        la chaîne, image d'attente, cadre à dégradé doré) : voir
+        src/components/layout/twitch-live.tsx. Le lecteur vidéo embarqué
+        lui-même (le script tiers `embed.twitch.tv`) n'est lui pas porté :
+        c'est un second chantier, et le même lecteur sert aussi dans la
+        colonne de la galerie — autant le faire une seule fois, plus tard.
       */}
-      <div className="mx-auto mt-16 flex aspect-video w-[min(90vw,50rem)] items-center justify-center rounded-md border-2 border-dashed border-white/15">
-        <a
-          href={TWITCH}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gold-text hover:text-gold-text-lit text-xl transition-all"
-        >
-          twitch.tv/barbe___douce
-        </a>
-      </div>
+      <TwitchLive className="mx-auto mt-16" />
 
       <div className="mx-auto mt-16 flex w-[min(90vw,62.5rem)] flex-col justify-between gap-8 min-[800px]:flex-row">
         <div>
