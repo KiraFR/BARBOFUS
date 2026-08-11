@@ -165,6 +165,8 @@ export const messages = {
     errorNameRequired: "Choisis un nom.",
     errorPasswordTooShort: "Le mot de passe doit faire au moins 8 caractères.",
     errorPasswordMismatch: "Les deux mots de passe ne correspondent pas.",
+    authSimulee:
+      "Session simulée : n'importe quel identifiant est accepté et rien n'est vérifié. À remplacer par l'API.",
   },
   en: {
     footerLegals:
@@ -304,6 +306,8 @@ export const messages = {
     errorNameRequired: "Please choose a name.",
     errorPasswordTooShort: "The password must be at least 8 characters long.",
     errorPasswordMismatch: "The two passwords do not match.",
+    authSimulee:
+      "Simulated session: any credentials are accepted and nothing is checked. To be replaced by the API.",
   },
   es: {
     footerLegals:
@@ -444,6 +448,8 @@ export const messages = {
     errorNameRequired: "Elige un nombre.",
     errorPasswordTooShort: "La contraseña debe tener al menos 8 caracteres.",
     errorPasswordMismatch: "Las dos contraseñas no coinciden.",
+    authSimulee:
+      "Sesión simulada: se acepta cualquier credencial y no se verifica nada. Se reemplazará por la API.",
   },
   pt: {
     footerLegals:
@@ -584,6 +590,8 @@ export const messages = {
     errorNameRequired: "Escolha um nome.",
     errorPasswordTooShort: "A senha deve ter pelo menos 8 caracteres.",
     errorPasswordMismatch: "As duas senhas não coincidem.",
+    authSimulee:
+      "Sessão simulada: qualquer credencial é aceita e nada é verificado. Será substituída pela API.",
   },
 } satisfies Record<Locale, Record<string, string>>;
 

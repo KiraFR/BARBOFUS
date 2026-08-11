@@ -27,6 +27,24 @@ export type NavItem = {
   titre: string;
 };
 
+/**
+ * Le menu, selon qu'on soit connecté ou non.
+ *
+ * Les cinq premières entrées sont communes ; seule la fin change. La
+ * déconnexion n'y figure pas : ce n'est pas un lien mais un bouton de
+ * formulaire, traité à part dans la barre de navigation.
+ */
+export function navigation(connecte: boolean): NavItem[] {
+  const communes = navigationVisiteur().slice(0, 5);
+
+  if (!connecte) return navigationVisiteur();
+
+  return [
+    ...communes,
+    { href: "/mon-compte", emoji: "⚙️", cle: "buttonDashboard", titre: "Espace mon compte" },
+  ];
+}
+
 /** Le menu tel qu'il apparaît pour un visiteur non connecté. */
 export function navigationVisiteur(): NavItem[] {
   return [

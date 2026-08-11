@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { LocaleSwitcher } from "@/components/layout/locale-switcher";
+import { estConnecte } from "@/lib/auth";
 import { MainNav } from "@/components/layout/main-nav";
 import { PromoBanner } from "@/components/layout/promo-banner";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
@@ -64,6 +65,10 @@ export default async function RootLayout({
 
   const t = getMessages(locale);
 
+  // L'état de connexion est lu côté serveur : le menu est donc juste dès le
+  // premier rendu, sans clignotement entre « visiteur » et « membre ».
+  const connecte = await estConnecte();
+
   return (
     <html
       lang={locale}
@@ -73,7 +78,7 @@ export default async function RootLayout({
         <PromoBanner />
         <SiteHeader locale={locale} />
         <LocaleSwitcher locale={locale} />
-        <MainNav t={t} locale={locale} />
+        <MainNav t={t} locale={locale} connecte={connecte} />
         {children}
         <ScrollToTop />
         <SiteFooter t={t} locale={locale} />

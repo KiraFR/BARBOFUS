@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { images } from "@/lib/assets";
-import { navigationVisiteur, type NavItem } from "@/lib/navigation";
+import { deconnecter } from "@/lib/auth-actions";
+import { navigation, type NavItem } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 import { lien, type Locale, type Messages } from "@/messages";
 
@@ -24,10 +25,18 @@ import { lien, type Locale, type Messages } from "@/messages";
  * (Mon compte, Se déconnecter). Il n'y a pas d'authentification tant que l'API
  * n'est pas branchée, donc le menu est toujours celui d'un visiteur.
  */
-export function MainNav({ t, locale }: { t: Messages; locale: Locale }) {
+export function MainNav({
+  t,
+  locale,
+  connecte,
+}: {
+  t: Messages;
+  locale: Locale;
+  connecte: boolean;
+}) {
   const pathname = usePathname();
   const [menuOuvert, setMenuOuvert] = useState(false);
-  const items = navigationVisiteur();
+  const items = navigation(connecte);
 
   // L'URL courante porte la langue en tête (« /fr/login ») ; on la retire pour
   // comparer avec les chemins du menu, qui n'en ont pas.
@@ -113,6 +122,21 @@ export function MainNav({ t, locale }: { t: Messages; locale: Locale }) {
             </Link>
           );
         })}
+
+        {/* La déconnexion n'est pas un lien mais une action : elle doit
+            modifier l'état du serveur, donc un formulaire, pas un <a>. */}
+        {connecte ? (
+          <form action={deconnecter}>
+            <input type="hidden" name="locale" value={locale} />
+            <button
+              type="submit"
+              className="hover:text-ivory-dark flex h-12 items-center px-5 transition-all focus:outline-none min-[1301px]:h-8"
+            >
+              <span aria-hidden="true">🚪</span>
+              {t.buttonLogout}
+            </button>
+          </form>
+        ) : null}
       </div>
 
       {/* Logo réduit, visible seulement quand la barre est repliée. */}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 
 import { FormNotice } from "@/components/auth/auth-screen";
+import { connecter } from "@/lib/auth-actions";
 import { SubmitButton } from "@/components/forms/submit-button";
 import { fieldIcons, TextField } from "@/components/forms/text-field";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -50,21 +51,26 @@ export function LoginForm({ t, locale }: { t: Messages; locale: Locale }) {
     event.preventDefault();
     setNotice(null);
 
+    const donnees = new FormData(event.currentTarget);
     const found = validate(event.currentTarget);
     setErrors(found);
     if (Object.keys(found).length > 0) {
       return;
     }
 
-    // Tient lieu d'appel réseau, le temps de vérifier l'état « envoi en cours ».
+    // Ouvre la session simulée côté serveur, qui redirige vers l'accueil.
+    // Aucun identifiant n'est vérifié : voir l'avertissement affiché plus bas
+    // et le garde-fou dans src/lib/auth.ts.
     setPending(true);
-    await new Promise((resolve) => setTimeout(resolve, 700));
+    donnees.set("locale", locale);
+    await connecter(donnees);
     setPending(false);
-    setNotice("L'API n'est pas encore branchée : personne ne peut se connecter pour l'instant.");
   }
 
   return (
     <form onSubmit={onSubmit} noValidate className="flex w-full flex-col items-center gap-y-8">
+      <FormNotice>{t.authSimulee}</FormNotice>
+
       <TextField
         name="email"
         type="email"
