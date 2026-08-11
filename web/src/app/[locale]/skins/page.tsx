@@ -6,7 +6,7 @@ import { MissSkinPodium } from "@/components/skins/miss-skin-podium";
 import { SkinFilters } from "@/components/skins/skin-filters";
 import { estConnecte } from "@/lib/auth";
 import { filtrerSkins, lireFiltres } from "@/lib/filtres";
-import { skins } from "@/lib/fixtures/skins";
+import { chargerSkins } from "@/lib/skins-source";
 import { alternatesPour } from "@/lib/seo";
 import { estCodeTri, TRI_DEFAUT, trierSkins } from "@/lib/tri";
 import { getMessages, type Locale } from "@/messages";
@@ -39,6 +39,7 @@ export default async function SkinsPage({
   const requete = await searchParams;
   const t = getMessages(locale);
   const connecte = await estConnecte();
+  const skins = await chargerSkins();
 
   const sortDemande = typeof requete.sort === "string" ? requete.sort : undefined;
   const tri = estCodeTri(sortDemande) ? sortDemande : TRI_DEFAUT;

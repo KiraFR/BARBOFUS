@@ -18,7 +18,7 @@ function trouverSkin(id: string): SkinCardItem | undefined {
 /** Un titre lisible même quand le skin est publié sans nom (cas fréquent). */
 function titreDuSkin(skin: SkinCardItem): string {
   if (skin.name) return skin.name;
-  return skin.breed.name ? `Skin Dofus ${skin.breed.name}` : "Skin Dofus";
+  return skin.breed?.name ? `Skin Dofus ${skin.breed?.name}` : "Skin Dofus";
 }
 
 /**
@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: ParametresPage): Promise<Meta
   if (!skin) return {};
 
   const titre = titreDuSkin(skin);
-  const description = skin.breed.name
-    ? `Skin Dofus ${skin.breed.name} par ${skin.user.name}, ${skin.total_views.toLocaleString(locale)} vues sur Barbofus.`
+  const description = skin.breed?.name
+    ? `Skin Dofus ${skin.breed?.name} par ${skin.user.name}, ${skin.total_views.toLocaleString(locale)} vues sur Barbofus.`
     : `Skin Dofus par ${skin.user.name}, ${skin.total_views.toLocaleString(locale)} vues sur Barbofus.`;
   const image = storageUrl(skin.image_path);
 

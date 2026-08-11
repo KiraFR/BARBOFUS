@@ -105,7 +105,7 @@ export function SkinDetail({
   locale: Locale;
   t: Messages;
 }) {
-  const classe = skin.breed.name;
+  const classe = skin.breed?.name;
   const description = classe ? `Skin Dofus ${classe}` : "Skin Dofus";
 
   const items = EMPLACEMENTS.map((emplacement) => ({

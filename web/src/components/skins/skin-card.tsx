@@ -45,7 +45,7 @@ export function SkinCard({
    */
   className?: string;
 }) {
-  const classe = skin.breed.name;
+  const classe = skin.breed?.name;
   const description = classe ? `Skin Dofus ${classe}` : "Skin Dofus";
 
   return (

@@ -225,9 +225,13 @@ export interface SkinItems {
 /**
  * Une classe de personnage, telle que l'API la rend.
  *
- * Les champs sont facultatifs : la production sert `{}` pour certains skins
- * (le skin 94867, par exemple). Le front doit donc savoir afficher une carte
- * sans classe — ce n'est pas une précaution, c'est un cas observé.
+ * DEUX formes d'absence, toutes deux observées en production :
+ *   - `{}` — un objet vide (skin 94867) ;
+ *   - `null` — carrément rien.
+ *
+ * D'où `SkinBreed | null` partout où ce champ apparaît, et l'accès systématique
+ * par `skin.breed?.name`. Le second cas n'est apparu qu'en branchant la
+ * production : treize fixtures écrites à la main ne l'avaient pas révélé.
  */
 export interface SkinBreed {
   id?: number;
@@ -244,7 +248,7 @@ export interface SkinDetail {
   face: number;
   gender: Gender | null;
   colors: SkinColors;
-  breed: SkinBreed;
+  breed: SkinBreed | null;
   user: PublicUser;
   items: SkinItems;
   created_at: string;

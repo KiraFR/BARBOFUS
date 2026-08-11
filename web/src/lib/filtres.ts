@@ -190,7 +190,7 @@ export function filtrerSkins(skins: SkinCardItem[], filtres: Filtres): SkinCardI
     // « Feca », et les deux doivent se reconnaître.
     if (
       filtres.classes.length > 0 &&
-      !filtres.classes.some((c) => normaliser(c) === normaliser(skin.breed.name ?? ""))
+      !filtres.classes.some((c) => normaliser(c) === normaliser(skin.breed?.name ?? ""))
     ) {
       return false;
     }

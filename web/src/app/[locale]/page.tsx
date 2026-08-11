@@ -11,7 +11,7 @@ import {
 } from "@/components/home/home-sections";
 import { TwitchLive } from "@/components/layout/twitch-live";
 import { estConnecte } from "@/lib/auth";
-import { skins } from "@/lib/fixtures/skins";
+import { chargerSkins } from "@/lib/skins-source";
 import { texteEnrichi } from "@/lib/texte";
 import { alternatesPour } from "@/lib/seo";
 import { getMessages, type Locale } from "@/messages";
@@ -36,6 +36,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
   const { locale } = await params;
   const t = getMessages(locale);
   const connecte = await estConnecte();
+  const skins = await chargerSkins();
 
   return (
     <main className="w-full flex-1">

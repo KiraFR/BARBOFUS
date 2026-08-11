@@ -175,8 +175,8 @@ export default function DesignPage() {
                   {skin.name ?? "Sans nom"}
                 </CardTitle>
                 <p className="text-muted-foreground truncate text-xs">
-                  {skin.breed.name ?? "Classe inconnue"} · {skin.gender === 1 ? "Femme" : "Homme"} ·
-                  par {skin.user.name}
+                  {skin.breed?.name ?? "Classe inconnue"} · {skin.gender === 1 ? "Femme" : "Homme"}{" "}
+                  · par {skin.user.name}
                 </p>
               </CardHeader>
               <CardContent>
