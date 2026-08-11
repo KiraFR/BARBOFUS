@@ -8,6 +8,15 @@ import type { CurrentUser } from "@/types/api";
  * afficherait une liste vide. L'adresse e-mail, elle, est fictive : aucune
  * donnée personnelle réelle ne doit se retrouver dans le dépôt.
  */
+/**
+ * Les skins mis en favori par l'utilisateur de démonstration.
+ *
+ * L'API ne rend ni les favoris ni les likes : cette liste est arbitraire, elle
+ * sert à peupler l'onglet « Mes favoris ». Elle disparaîtra quand l'endpoint de
+ * galerie renverra `favorited_by_me`.
+ */
+export const favorisDemo = [94882, 94875, 94870, 94868];
+
 export const utilisateurDemo: CurrentUser = {
   id: 533,
   name: "CrioZola",
