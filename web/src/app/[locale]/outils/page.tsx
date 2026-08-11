@@ -70,16 +70,9 @@ const OUTILS: {
     infobulle: "Rainikrone Solver par Emmathie",
     auteur: { nom: "Emmathie", url: "https://emmathie.fr/" },
   },
-  {
-    image: "Dofus_Logo-2_0.png",
-    titre: "titleToolsSkin20",
-    description: "descriptionToolsSkin20",
-    bouton: "buttonToolsSkin20",
-    // La galerie Dofus 2.0 n'est pas reprise dans la refonte : le lien reste
-    // sur l'ancien site, comme le Skinator et les havre-sacs.
-    url: "https://barbofus.com/skins",
-    infobulle: "Galerie de skins Dofus 2.0",
-  },
+  // L'entrée « Un peu de nostalgie ? Les skins 2.0 » a été retirée : Dofus 2
+  // n'existe plus, et l'adresse /skins qu'elle pointait revient désormais à la
+  // galerie principale (voir les redirections dans src/proxy.ts).
 ];
 
 const LIEN_DORE =

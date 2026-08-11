@@ -87,10 +87,6 @@ export const messages = {
     descriptionToolsRainikrone:
       "Cette application web vous permet de résoudre le puzzle du combat contre la Rainikrone pour obtenir le Dofus Ivoire.\n                    <br>Importez une capture d'écran du combat et l'outil détectera automatiquement la disposition de la carte de combat, puis calculera la stratégie optimale pour venir à bout du boss !",
     buttonToolsRainikrone: "Ouvrir le Rainikrone Solver",
-    titleToolsSkin20: "Un peu de nostalgie ? Les skins 2.0",
-    descriptionToolsSkin20:
-      "Plongez dans un océan de souvenirs avec le retour des skins emblématiques de Dofus 2.0 !\n                <br>Ces designs intemporels, qui ont marqué des générations d’aventuriers, réveillent la magie des premières explorations. Redécouvrez l’élégance des équipements d’antan et laissez la nostalgie vous guider à travers le Monde des Douze.",
-    buttonToolsSkin20: "Cliquez ici pour les (re)découvrir",
 
     titleHome: "Barbofus, la galerie de skins dofus",
     descriptionHome:
@@ -266,10 +262,6 @@ export const messages = {
     descriptionToolsRainikrone:
       "This web app lets you solve the Rainikrone combat puzzle required to obtain the Ivory Dofus.\n                    <br>Upload a screenshot of the fight and the tool will automatically detect the battle map layout, then calculate the optimal strategy to defeat the boss!",
     buttonToolsRainikrone: "Open the Rainikrone Solver",
-    titleToolsSkin20: "A bit of nostalgia? The 2.0 skins",
-    descriptionToolsSkin20:
-      "Dive into an ocean of memories with the return of the iconic Dofus 2.0 skins!\n                <br>These timeless designs, which have marked generations of adventurers, bring back the magic of early explorations. Rediscover the elegance of old gear and let nostalgia guide you through the World of Twelve.",
-    buttonToolsSkin20: "Click here to (re)discover them",
 
     titleHome: "Barbofus, the Dofus skins gallery",
     descriptionHome:
@@ -442,10 +434,6 @@ export const messages = {
     descriptionToolsRainikrone:
       "Esta aplicación web te permite resolver el puzle del combate contra la Rainikrone para obtener el Dofus de Marfil.\n                    <br>Sube una captura de pantalla del combate y la herramienta detectará automáticamente la disposición del mapa de batalla, ¡luego calculará la estrategia óptima para derrotar al jefe!",
     buttonToolsRainikrone: "Abrir el Rainikrone Solver",
-    titleToolsSkin20: "¿Algo de nostalgia? Las skins 2.0",
-    descriptionToolsSkin20:
-      "¡Sumérgete en un mar de memorias con el regreso de las icónicas skins de Dofus 2.0!\n                <br>Estos clásicos diseños, que han marcado generaciones de aventureros, traen de vuelta la magia de las primeras exploraciones. Redescubre la elegancia del atiguo equipamiento y deja que la nostalgia te guíe a través del Mundo de los Doce.",
-    buttonToolsSkin20: "Haz clic aquí para (re)descubrirlas",
 
     titleHome: "Barbofus, la galería de skins de Dofus",
     descriptionHome:
@@ -619,10 +607,6 @@ export const messages = {
     descriptionToolsRainikrone:
       "Este aplicativo web permite resolver o puzzle do combate contra a Rainikrone para obter o Dofus de Marfim.\n                    <br>Envie uma captura de tela do combate e a ferramenta detectará automaticamente a disposição do mapa de batalha, calculando a estratégia ideal para derrotar o chefe!",
     buttonToolsRainikrone: "Abrir o Rainikrone Solver",
-    titleToolsSkin20: "Um pouco de nostalgia? As aparências 2.0 ",
-    descriptionToolsSkin20:
-      "Mergulhe em um oceano de memórias com o retorno das aparências icônicas do Dofus 2.0!\n                <br>Estes designs atemporais, que marcaram gerações de aventureiros, trazem a à tona a magia das primeiras explorações. Redescubra a elegância do antigo equipamento e deixa a nostalgia guiar você através do Mundo dos Doze.",
-    buttonToolsSkin20: "Clique aqui para (re)descobrir",
 
     titleHome: "Barbofus, a galeria de aparências do Dofus",
     descriptionHome:
