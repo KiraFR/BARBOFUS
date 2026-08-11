@@ -25,6 +25,32 @@ export type Messages = (typeof messages)["fr"];
 
 export const messages = {
   fr: {
+    descriptionTools: "Voici une liste d'outils qui seront utiles pour votre aventure !",
+    titleToolsTougli: "Tougli - Le guide opti des Dofus",
+    descriptionToolsTougli:
+      "Ce site web vous permet de suivre une route optimisée pour vos Dofus, d'avoir la liste des ressources requises et d'enregistrer votre progression.\n                    <br>Toutes les quêtes nécessaires à l'obtention du Dofus seront listées dans un ordre efficace, et le document garde en mémoire les quêtes achevées pour suivre votre avancée facilement.",
+    buttonToolsTougli: "Cliquez ici pour ouvrir",
+    titleToolsGrougalorasalar: "Grougalorasalar Solver",
+    descriptionToolsGrougalorasalar:
+      "Cette application web vous permet de résoudre le combat tactique contre le Grougalorasalar pour obtenir le Dofus Ébène.\n                    <br>Renseignez la configuration du combat et l'outil calculera automatiquement la stratégie optimale pour venir à bout de ce redoutable adversaire !",
+    buttonToolsGrougalorasalar: "Ouvrir le Grougalorasalar Solver",
+    titleToolsBolgrot: "Bolgrot Solver",
+    descriptionToolsBolgrot:
+      "Cette application web vous permet de résoudre le combat tactique contre le Bolgrot afin de continuer votre Dofus Turquoise.\n                    <br>Renseignez la configuration du combat et l'outil calculera automatiquement la stratégie optimale pour venir à bout de ce redoutable adversaire !",
+    buttonToolsBolgrot: "Ouvrir le Bolgrot Solver",
+    titleToolsMinigolem: "Minogolem Solver",
+    descriptionToolsMinigolem:
+      "Cette application web vous permet de simuler le combat tactique des minogolem pour obtenir le Dofus Pourpre.\n                    <br>Renseignez les états à venir et l'outil calculera automatiquement vos prochains tours de jeu optimaux, pour ne plus jamais rater une opportunité !",
+    buttonToolsMinigolem: "Ouvrir le Minogolem Solver",
+    titleToolsRainikrone: "Rainikrone Solver",
+    descriptionToolsRainikrone:
+      "Cette application web vous permet de résoudre le puzzle du combat contre la Rainikrone pour obtenir le Dofus Ivoire.\n                    <br>Importez une capture d'écran du combat et l'outil détectera automatiquement la disposition de la carte de combat, puis calculera la stratégie optimale pour venir à bout du boss !",
+    buttonToolsRainikrone: "Ouvrir le Rainikrone Solver",
+    titleToolsSkin20: "Un peu de nostalgie ? Les skins 2.0",
+    descriptionToolsSkin20:
+      "Plongez dans un océan de souvenirs avec le retour des skins emblématiques de Dofus 2.0 !\n                <br>Ces designs intemporels, qui ont marqué des générations d’aventuriers, réveillent la magie des premières explorations. Redécouvrez l’élégance des équipements d’antan et laissez la nostalgie vous guider à travers le Monde des Douze.",
+    buttonToolsSkin20: "Cliquez ici pour les (re)découvrir",
+
     titleHome: "Barbofus, la galerie de skins dofus",
     descriptionHome:
       "Bienvenue sur le site, explore la galerie de skin, ou poste les tiens et deviens la miss'skin de Dofus !",
@@ -135,6 +161,32 @@ export const messages = {
     errorPasswordMismatch: "Les deux mots de passe ne correspondent pas.",
   },
   en: {
+    descriptionTools: "Here is a list of tools that will be useful for your adventure!",
+    titleToolsTougli: "Tougli - An optimized guide for the Dofus",
+    descriptionToolsTougli:
+      "This Google Sheet allows you to track an optimized route for your Dofus, view the list of required resources, and record your progress.\n                    <br>All the quests required to obtain the Dofus will be listed in an efficient order, and the document will keep track of completed quests to easily monitor your progress.",
+    buttonToolsTougli: "Click here to open",
+    titleToolsGrougalorasalar: "Grougalorasalar Solver",
+    descriptionToolsGrougalorasalar:
+      "This web app lets you solve the tactical combat against the Grougalorasalar to obtain the Ebony Dofus.\n                    <br>Enter the fight configuration and the tool will automatically calculate the optimal strategy to overcome this formidable opponent!",
+    buttonToolsGrougalorasalar: "Open the Grougalorasalar Solver",
+    titleToolsBolgrot: "Bolgrot Solver",
+    descriptionToolsBolgrot:
+      "This web app lets you solve the tactical combat against the Bolgrot to continue your Turquoise Dofus quest.\n                    <br>Enter the fight configuration and the tool will automatically calculate the optimal strategy to overcome this formidable opponent!",
+    buttonToolsBolgrot: "Open the Bolgrot Solver",
+    titleToolsMinigolem: "Minogolem Solver",
+    descriptionToolsMinigolem:
+      "This web app lets you simulate the tactical minogolem combat required to obtain the Crimson Dofus.\n                    <br>Enter the upcoming states and the tool will automatically calculate your optimal next turns, so you never miss a winning move again!",
+    buttonToolsMinigolem: "Open Minogolem Solver",
+    titleToolsRainikrone: "Rainikrone Solver",
+    descriptionToolsRainikrone:
+      "This web app lets you solve the Rainikrone combat puzzle required to obtain the Ivory Dofus.\n                    <br>Upload a screenshot of the fight and the tool will automatically detect the battle map layout, then calculate the optimal strategy to defeat the boss!",
+    buttonToolsRainikrone: "Open the Rainikrone Solver",
+    titleToolsSkin20: "A bit of nostalgia? The 2.0 skins",
+    descriptionToolsSkin20:
+      "Dive into an ocean of memories with the return of the iconic Dofus 2.0 skins!\n                <br>These timeless designs, which have marked generations of adventurers, bring back the magic of early explorations. Rediscover the elegance of old gear and let nostalgia guide you through the World of Twelve.",
+    buttonToolsSkin20: "Click here to (re)discover them",
+
     titleHome: "Barbofus, the Dofus skins gallery",
     descriptionHome:
       "Welcome to the website! Explore the skin gallery, share your own, and become the Miss'skin of Dofus!",
@@ -242,6 +294,32 @@ export const messages = {
     errorPasswordMismatch: "The two passwords do not match.",
   },
   es: {
+    descriptionTools: "¡Aquí hay una lista de herramientas que te serán útiles para tu aventura!",
+    titleToolsTougli: "Tougli - Una guía optimizada para Dofus",
+    descriptionToolsTougli:
+      "En esta Hoja de cálculo de Google encontrarás una ruta optimicada para la búsqueda de tus Dofus, ver la lista de recursos requeridos,y llevar un registro de tu progreso.\n                    <br>Todas las misiones requeridas para obtener los Dofus están listadasen un orden eficiente, y el documento guardará registro de las misiones completadas para que puedas monitorear tu progreso fácilmente.",
+    buttonToolsTougli: "Haz clic aquí para abrir",
+    titleToolsGrougalorasalar: "Grougalorasalar Solver",
+    descriptionToolsGrougalorasalar:
+      "Esta aplicación web te permite resolver el combate táctico contra el Grougalorasalar para obtener el Dofus Ébano.\n                    <br>Introduce la configuración del combate y la herramienta calculará automáticamente la estrategia óptima para vencer a este formidable adversario!",
+    buttonToolsGrougalorasalar: "Abrir el Grougalorasalar Solver",
+    titleToolsBolgrot: "Bolgrot Solver",
+    descriptionToolsBolgrot:
+      "Esta aplicación web te permite resolver el combate táctico contra el Bolgrot para continuar con tu Dofus Turquesa.\n                    <br>Introduce la configuración del combate y la herramienta calculará automáticamente la estrategia óptima para vencer a este formidable adversario!",
+    buttonToolsBolgrot: "Abrir el Bolgrot Solver",
+    titleToolsMinigolem: "Minogolem Solver",
+    descriptionToolsMinigolem:
+      "Esta aplicación web te permite simular el combate táctico de los minogolem para obtener el Dofus Carmesí.\n                    <br>Introduce los estados por venir y la herramienta calculará automáticamente tus próximos turnos óptimos, ¡para no perder ninguna oportunidad ganadora!",
+    buttonToolsMinigolem: "Abrir Minogolem Solver",
+    titleToolsRainikrone: "Rainikrone Solver",
+    descriptionToolsRainikrone:
+      "Esta aplicación web te permite resolver el puzle del combate contra la Rainikrone para obtener el Dofus de Marfil.\n                    <br>Sube una captura de pantalla del combate y la herramienta detectará automáticamente la disposición del mapa de batalla, ¡luego calculará la estrategia óptima para derrotar al jefe!",
+    buttonToolsRainikrone: "Abrir el Rainikrone Solver",
+    titleToolsSkin20: "¿Algo de nostalgia? Las skins 2.0",
+    descriptionToolsSkin20:
+      "¡Sumérgete en un mar de memorias con el regreso de las icónicas skins de Dofus 2.0!\n                <br>Estos clásicos diseños, que han marcado generaciones de aventureros, traen de vuelta la magia de las primeras exploraciones. Redescubre la elegancia del atiguo equipamiento y deja que la nostalgia te guíe a través del Mundo de los Doce.",
+    buttonToolsSkin20: "Haz clic aquí para (re)descubrirlas",
+
     titleHome: "Barbofus, la galería de skins de Dofus",
     descriptionHome:
       "¡Bienvenido al sitio! Explora la galería de skins, comparte tus creaciones y ¡gana el premio Miss'Skin de Dofus!",
@@ -350,6 +428,32 @@ export const messages = {
     errorPasswordMismatch: "Las dos contraseñas no coinciden.",
   },
   pt: {
+    descriptionTools: "Aqui está uma lista de ferramentas que serão úteis para sua aventura!",
+    titleToolsTougli: "Tougli - Um guia otimizado para Dofus",
+    descriptionToolsTougli:
+      "Esta Planilha Google permite que você acompanhe uma rota otimizada para o Dofus, veja a lista de recursos necessários e grave seu progresso.\n                    <br>Todas as missões necessárias para obter os Dofus serão listadas na ordem mais eficiente e o documento Irá acompanhar as missões concluídas para monitorar facilmente o seu progresso.",
+    buttonToolsTougli: "Clique aqui para abrir",
+    titleToolsGrougalorasalar: "Grougalorasalar Solver",
+    descriptionToolsGrougalorasalar:
+      "Este aplicativo web permite resolver o combate tático contra o Grougalorasalar para obter o Dofus Ébano.\n                    <br>Insira a configuração do combate e a ferramenta calculará automaticamente a estratégia ideal para vencer este formidável adversário!",
+    buttonToolsGrougalorasalar: "Abrir o Grougalorasalar Solver",
+    titleToolsBolgrot: "Bolgrot Solver",
+    descriptionToolsBolgrot:
+      "Este aplicativo web permite resolver o combate tático contra o Bolgrot para continuar sua busca pelo Dofus Turquesa.\n                    <br>Insira a configuração do combate e a ferramenta calculará automaticamente a estratégia ideal para vencer este formidável adversário!",
+    buttonToolsBolgrot: "Abrir o Bolgrot Solver",
+    titleToolsMinigolem: "Minogolem Solver",
+    descriptionToolsMinigolem:
+      "Este aplicativo web permite simular o combate tático dos minogolem para obter o Dofus Carmesim.\n                    <br>Insira os estados futuros e a ferramenta calculará automaticamente seus próximos turnos ideais, para nunca mais perder uma jogada vencedora!",
+    buttonToolsMinigolem: "Abrir o Minogolem Solver",
+    titleToolsRainikrone: "Rainikrone Solver",
+    descriptionToolsRainikrone:
+      "Este aplicativo web permite resolver o puzzle do combate contra a Rainikrone para obter o Dofus de Marfim.\n                    <br>Envie uma captura de tela do combate e a ferramenta detectará automaticamente a disposição do mapa de batalha, calculando a estratégia ideal para derrotar o chefe!",
+    buttonToolsRainikrone: "Abrir o Rainikrone Solver",
+    titleToolsSkin20: "Um pouco de nostalgia? As aparências 2.0 ",
+    descriptionToolsSkin20:
+      "Mergulhe em um oceano de memórias com o retorno das aparências icônicas do Dofus 2.0!\n                <br>Estes designs atemporais, que marcaram gerações de aventureiros, trazem a à tona a magia das primeiras explorações. Redescubra a elegância do antigo equipamento e deixa a nostalgia guiar você através do Mundo dos Doze.",
+    buttonToolsSkin20: "Clique aqui para (re)descobrir",
+
     titleHome: "Barbofus, a galeria de aparências do Dofus",
     descriptionHome:
       "Boas vindas ao site! Explore a galeria de aparências, compartilhe suas próprias criações e torne-se Miss'Aparência do Dofus!",

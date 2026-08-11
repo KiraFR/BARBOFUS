@@ -7,10 +7,10 @@ import {
   Partners,
   Portrait,
   Socials,
-  texteEnrichi,
   Translators,
 } from "@/components/home/home-sections";
 import { skins } from "@/lib/fixtures/skins";
+import { texteEnrichi } from "@/lib/texte";
 import { alternatesPour } from "@/lib/seo";
 import { getMessages, type Locale } from "@/messages";
 

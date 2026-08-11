@@ -169,28 +169,6 @@ export function Translators() {
   );
 }
 
-/**
- * Rend un texte traduit contenant des `<strong>` et des marqueurs `:nom`.
- *
- * Le texte d'origine vient de Laravel, qui y mélange du HTML et ses propres
- * marqueurs de substitution. Plutôt que d'injecter ce HTML tel quel, on le
- * découpe et on reconstruit des nœuds React : le résultat est identique et
- * aucune balise venue d'un fichier de traduction n'est interprétée.
- */
-export function texteEnrichi(texte: string, valeurs: Record<string, string>): ReactNode[] {
-  const substitue = Object.entries(valeurs).reduce(
-    (acc, [cle, valeur]) => acc.replaceAll(`:${cle}`, valeur),
-    texte,
-  );
-
-  return substitue.split(/(<strong>.*?<\/strong>)/g).map((morceau, index) => {
-    // `[\s\S]` plutôt que `.` avec le drapeau `s` : ce drapeau exige une cible
-    // ES2018, plus récente que celle du projet.
-    const gras = /^<strong>([\s\S]*)<\/strong>$/.exec(morceau);
-    return gras ? <strong key={index}>{gras[1]}</strong> : <span key={index}>{morceau}</span>;
-  });
-}
-
 /** Le portrait de Barbe Douce, à droite de sa présentation. */
 export function Portrait() {
   return (
