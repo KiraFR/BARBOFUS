@@ -25,6 +25,12 @@ export type Messages = (typeof messages)["fr"];
 
 export const messages = {
   fr: {
+    footerLegals:
+      'Dofus est un MMORPG édité par <a target="_blank" href="https://www.ankama.com/fr" title="Site web d\'Ankama" class="underline">Ankama</a>. "BARBOFUS" est un site non-officiel sans aucun lien avec Ankama.<br>Certaines illustrations sont la propriété d\'Ankama Studio et de Dofus - Tous droits réservés',
+    buttonLegals: "Mentions légales",
+    footerCopyright: "Tous droits réservés",
+    footerWebmaster: "Votre vision, notre code",
+
     descriptionTools: "Voici une liste d'outils qui seront utiles pour votre aventure !",
     titleToolsTougli: "Tougli - Le guide opti des Dofus",
     descriptionToolsTougli:
@@ -161,6 +167,12 @@ export const messages = {
     errorPasswordMismatch: "Les deux mots de passe ne correspondent pas.",
   },
   en: {
+    footerLegals:
+      'Dofus is an MMORPG published by <a target="_blank" href="https://www.ankama.com/fr" title="Ankama website" class="underline">Ankama</a>. "BARBOFUS" is an unofficial site with no affiliation to Ankama.<br> Some illustrations are the property of Ankama Studio and Dofus - All rights reserved.',
+    buttonLegals: "Legal notices",
+    footerCopyright: "All rights reserved.",
+    footerWebmaster: "Your vision, our code.",
+
     descriptionTools: "Here is a list of tools that will be useful for your adventure!",
     titleToolsTougli: "Tougli - An optimized guide for the Dofus",
     descriptionToolsTougli:
@@ -294,6 +306,12 @@ export const messages = {
     errorPasswordMismatch: "The two passwords do not match.",
   },
   es: {
+    footerLegals:
+      'Dofus es un MMORPG publicado por <a target="_blank" href="https://www.ankama.com/fr" title="Ankama website" class="underline">Ankama</a>. "BARBOFUS" es un sitio no oficial sin afiliación a Ankama.<br> Algunas ilustraciones son propiedad de Ankama Studio y Dofus - Todos los derechos reservados.',
+    buttonLegals: "Avisos legales",
+    footerCopyright: "Todos los derechos reservados.",
+    footerWebmaster: "Tu visión, nuestro código.",
+
     descriptionTools: "¡Aquí hay una lista de herramientas que te serán útiles para tu aventura!",
     titleToolsTougli: "Tougli - Una guía optimizada para Dofus",
     descriptionToolsTougli:
@@ -428,6 +446,12 @@ export const messages = {
     errorPasswordMismatch: "Las dos contraseñas no coinciden.",
   },
   pt: {
+    footerLegals:
+      'Dofus é um MMORPG publicado pela <a target="_blank" href="https://www.ankama.com/fr" title="Ankama website" class="underline">Ankama</a>. "BARBOFUS" is an unofficial site with no affiliation to Ankama.<br> Algumas ilustrações são propriedade da Ankama Studio e Dofus - Todos os direitos reservados.',
+    buttonLegals: "Avisos legais",
+    footerCopyright: "Todos os direitos reservados.",
+    footerWebmaster: "Sua visão, nosso código.",
+
     descriptionTools: "Aqui está uma lista de ferramentas que serão úteis para sua aventura!",
     titleToolsTougli: "Tougli - Um guia otimizado para Dofus",
     descriptionToolsTougli:

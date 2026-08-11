@@ -42,7 +42,10 @@ export function MainNav({ t, locale }: { t: Messages; locale: Locale }) {
   return (
     <nav
       className={cn(
-        "bg-anthracite border-ivory sticky top-0 z-40 w-full border-t-8",
+        // La bordure ivoire n'apparaît qu'en disposition bureau : en dessous
+        // de 1301 px la barre est repliée derrière le hamburger, et le site
+        // actuel ne la dessine pas non plus à ces largeurs.
+        "bg-anthracite border-ivory sticky top-0 z-40 w-full min-[1301px]:border-t-8",
         "text-inactive text-[1.35rem] font-thin tracking-tight",
       )}
     >
