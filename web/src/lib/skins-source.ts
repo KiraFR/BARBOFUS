@@ -1,6 +1,6 @@
 import "server-only";
 
-import { chargerSkinsDistants } from "@/lib/api/skins-distants";
+import { chargerSkinDistant, chargerSkinsDistants } from "@/lib/api/skins-distants";
 import { skins as skinsFixtures } from "@/lib/fixtures/skins";
 import type { SkinCardItem } from "@/types/api";
 
@@ -34,4 +34,24 @@ export async function chargerSkins(): Promise<SkinCardItem[]> {
 
   const distants = await chargerSkinsDistants(TAILLE_ECHANTILLON);
   return distants.length > 0 ? distants : skinsFixtures;
+}
+
+/**
+ * Un skin précis, pour sa fiche.
+ *
+ * Passe par `/api/skin/{id}`, qui répond pour n'importe quel identifiant du
+ * site — et pas seulement pour ceux tirés au sort par le proxy de la galerie.
+ * Chercher dans la liste chargée ne marcherait pas : la galerie n'en montre
+ * qu'un échantillon, et le site en compte plus de soixante mille.
+ *
+ * Les fixtures restent le dernier recours, pour que la fiche existe encore
+ * hors ligne.
+ */
+export async function chargerSkin(id: number): Promise<SkinCardItem | null> {
+  if (process.env.SKINS_SOURCE !== "fixtures") {
+    const distant = await chargerSkinDistant(id);
+    if (distant) return distant;
+  }
+
+  return skinsFixtures.find((skin) => skin.id === id) ?? null;
 }

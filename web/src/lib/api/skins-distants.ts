@@ -128,6 +128,34 @@ function estExploitable(valeur: unknown): valeur is SkinDetail {
   return typeof skin.id === "number" && typeof skin.image_path === "string" && !!skin.user;
 }
 
+/** Interroge `/api/skin/{id}` et rend la réponse brute, ou `null`. */
+async function interroger(id: number): Promise<unknown> {
+  try {
+    const reponse = await fetch(`${PROD}/api/skin/${id}`, {
+      headers: ENTETES,
+      next: { revalidate: DUREE_CACHE },
+    });
+    if (!reponse.ok) return null;
+
+    return (await reponse.json()) as unknown;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Un skin précis, par son identifiant.
+ *
+ * Contrairement à la liste, celui-ci correspond à un endpoint qui existe pour
+ * de bon : `GET /api/skin/{id}`. C'est donc le seul appel de ce fichier qui ne
+ * disparaîtra pas le jour où l'API sera complète.
+ */
+export async function chargerSkinDistant(id: number): Promise<SkinCardItem | null> {
+  const reponse = await interroger(id);
+
+  return estExploitable(reponse) ? normaliser(reponse) : null;
+}
+
 /**
  * Charge des skins depuis la production.
  *
@@ -142,20 +170,7 @@ export async function chargerSkinsDistants(combien: number): Promise<SkinCardIte
     for (let debut = 0; debut < identifiants.length; debut += PARALLELISME) {
       const paquet = identifiants.slice(debut, debut + PARALLELISME);
 
-      const reponses = await Promise.all(
-        paquet.map(async (id) => {
-          try {
-            const reponse = await fetch(`${PROD}/api/skin/${id}`, {
-              headers: ENTETES,
-              next: { revalidate: DUREE_CACHE },
-            });
-            if (!reponse.ok) return null;
-            return (await reponse.json()) as unknown;
-          } catch {
-            return null;
-          }
-        }),
-      );
+      const reponses = await Promise.all(paquet.map(interroger));
 
       for (const reponse of reponses) {
         if (estExploitable(reponse)) skins.push(normaliser(reponse));

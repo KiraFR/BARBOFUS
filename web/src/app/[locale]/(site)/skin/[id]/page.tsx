@@ -3,16 +3,24 @@ import { notFound } from "next/navigation";
 
 import { SkinDetail } from "@/components/skins/skin-detail";
 import { storageUrl } from "@/lib/assets";
-import { skins } from "@/lib/fixtures/skins";
 import { alternatesPour } from "@/lib/seo";
+import { chargerSkin } from "@/lib/skins-source";
 import { getMessages, type Locale } from "@/messages";
 import type { SkinCardItem } from "@/types/api";
 
-/** Retrouve un skin par son identifiant. `undefined` si l'URL est fausse. */
-function trouverSkin(id: string): SkinCardItem | undefined {
+/**
+ * Retrouve un skin par l'identifiant lu dans l'URL. `null` si l'URL ne porte
+ * pas un entier, ou si aucun skin ne correspond.
+ *
+ * On interroge la source de données plutôt que de fouiller la liste de la
+ * galerie : celle-ci n'est qu'un échantillon, et une fiche doit répondre pour
+ * n'importe lequel des soixante mille skins du site.
+ */
+async function trouverSkin(id: string): Promise<SkinCardItem | null> {
   const identifiant = Number(id);
-  if (!Number.isInteger(identifiant)) return undefined;
-  return skins.find((skin) => skin.id === identifiant);
+  if (!Number.isInteger(identifiant)) return null;
+
+  return chargerSkin(identifiant);
 }
 
 /** Un titre lisible même quand le skin est publié sans nom (cas fréquent). */
@@ -36,7 +44,7 @@ type ParametresPage = { params: Promise<{ locale: Locale; id: string }> };
  */
 export async function generateMetadata({ params }: ParametresPage): Promise<Metadata> {
   const { locale, id } = await params;
-  const skin = trouverSkin(id);
+  const skin = await trouverSkin(id);
   if (!skin) return {};
 
   const titre = titreDuSkin(skin);
@@ -67,7 +75,7 @@ export async function generateMetadata({ params }: ParametresPage): Promise<Meta
  */
 export default async function SkinPage({ params }: ParametresPage) {
   const { locale, id } = await params;
-  const skin = trouverSkin(id);
+  const skin = await trouverSkin(id);
   if (!skin) notFound();
 
   const t = getMessages(locale);
