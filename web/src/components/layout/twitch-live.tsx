@@ -125,6 +125,43 @@ export function TwitchLive({ className }: { className?: string }) {
 }
 
 /**
+ * La pastille d'état de l'en-tête du planning : un point et un mot, en lien
+ * vers la chaîne.
+ *
+ * L'original affiche « En direct » en permanence, avec un point qui clignote —
+ * aucun script ne vient jamais corriger ce texte, si bien que la page annonce
+ * un direct même quand la chaîne est éteinte. On le branche ici sur le même
+ * mécanisme que le reste du site : annoncer un direct qui n'a pas lieu, c'est
+ * exactement ce qu'un site ne doit pas faire.
+ */
+export function TwitchStatut({ className }: { className?: string }) {
+  const enDirect = useTwitchEnDirect();
+
+  return (
+    <a
+      href={TWITCH_CHANNEL_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "from-gold-dark/10 to-gold-lit/10 border-gold-dark/20 flex items-center justify-center gap-2.5 rounded-full border bg-gradient-to-r px-4 py-2 backdrop-blur-sm transition-all hover:brightness-125",
+        className,
+      )}
+    >
+      <span
+        aria-hidden="true"
+        className={cn(
+          "h-2.5 w-2.5 rounded-full shadow-lg",
+          enDirect ? "gold-gradient shadow-gold-dark/50 animate-pulse" : "bg-inactive",
+        )}
+      />
+      <span className="text-ivory/80 text-sm md:text-base">
+        {enDirect ? "En direct" : "Hors ligne"}
+      </span>
+    </a>
+  );
+}
+
+/**
  * L'avatar de la page /socials : halo doré et badge "LIVE" quand Barbe Douce
  * est en direct, halo "cœur" sinon. Remplace l'avatar statique qui ne
  * reproduisait pas ce comportement (composant serveur oblige).

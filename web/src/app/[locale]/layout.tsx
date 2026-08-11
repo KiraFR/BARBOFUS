@@ -2,15 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 
-import { LocaleSwitcher } from "@/components/layout/locale-switcher";
-import { estConnecte } from "@/lib/auth";
-import { MainNav } from "@/components/layout/main-nav";
-import { Notifications } from "@/components/layout/notifications";
-import { PromoBanner } from "@/components/layout/promo-banner";
-import { ScrollToTop } from "@/components/layout/scroll-to-top";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { estLocale, getMessages, locales } from "@/messages";
+import { estLocale, locales } from "@/messages";
 
 import "../globals.css";
 
@@ -43,11 +35,23 @@ export function generateStaticParams() {
 }
 
 /**
- * Mise en page racine.
+ * Mise en page racine : le document, et rien de plus.
  *
  * Elle vit sous `[locale]` et non à la racine de `app/`, ce que Next autorise
  * explicitement — c'est même nécessaire ici, puisque l'attribut `lang` du
  * document doit refléter la langue de l'URL.
+ *
+ * L'habillage (bandeau, en-tête, menu, pied de page) N'EST PAS ici, parce que
+ * le site a deux familles de pages et qu'elles ne le partagent pas :
+ *
+ *   - `(site)` — les pages normales, avec en-tête et menu ;
+ *   - `(ecran)` — le planning et les récompenses, montrés en plein écran
+ *     pendant le direct, sans menu ni en-tête.
+ *
+ * Côté Laravel la distinction existe déjà : ces deux pages étendent
+ * `layouts/empty-views` là où toutes les autres étendent `layouts/app`. Les
+ * groupes de routes de Next expriment exactement ça, et sans toucher aux URL —
+ * les parenthèses ne comptent pas dans le chemin.
  */
 export default async function RootLayout({
   children,
@@ -64,28 +68,12 @@ export default async function RootLayout({
     notFound();
   }
 
-  const t = getMessages(locale);
-
-  // L'état de connexion est lu côté serveur : le menu est donc juste dès le
-  // premier rendu, sans clignotement entre « visiteur » et « membre ».
-  const connecte = await estConnecte();
-
   return (
     <html
       lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        <PromoBanner />
-        <SiteHeader locale={locale} />
-        <LocaleSwitcher locale={locale} />
-        {/* La cloche n'existe que pour un membre connecté, comme sur le site. */}
-        {connecte ? <Notifications locale={locale} /> : null}
-        <MainNav t={t} locale={locale} connecte={connecte} />
-        {children}
-        <ScrollToTop />
-        <SiteFooter t={t} locale={locale} />
-      </body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { TwitchLiveAvatar } from "@/components/layout/twitch-live";
@@ -34,18 +35,22 @@ const urlReseau = (nom: (typeof reseaux)[number]["nom"]) =>
 function ReseauLien({
   href,
   vedette = false,
+  /** Un lien interne reste dans l'onglet courant : ce n'est pas un « réseau ». */
+  interne = false,
   children,
 }: {
   href: string;
   /** Cartes « mises en avant » : halo doré visible en permanence, sans fond. */
   vedette?: boolean;
+  interne?: boolean;
   children: ReactNode;
 }) {
+  const Balise = interne ? Link : "a";
+
   return (
-    <a
+    <Balise
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(interne ? {} : { target: "_blank", rel: "noopener noreferrer" })}
       className="gold-gradient group relative rounded-[14px] p-[2px]"
     >
       <span
@@ -65,7 +70,7 @@ function ReseauLien({
       >
         {children}
       </div>
-    </a>
+    </Balise>
   );
 }
 
@@ -73,11 +78,9 @@ function ReseauLien({
 const ICONE = "h-5 min-[500px]:h-8 text-ivory";
 
 export default async function SocialsPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  // Le paramètre n'est pas utilisé (page monolingue), mais on l'attend tout
-  // de même : Next 16 fournit `params` comme une promesse sur toutes les
-  // pages de `[locale]`, et il faut la consommer pour rester cohérent avec
-  // le reste du routage.
-  await params;
+  // La page n'est pas traduite, mais la langue sert malgré tout : le lien
+  // vers le planning doit rester dans la langue de l'URL courante.
+  const { locale } = await params;
 
   return (
     // Sur le site actuel, cette page utilise la mise en page « empty-views »
@@ -101,7 +104,7 @@ export default async function SocialsPage({ params }: { params: Promise<{ locale
 
         {/* Liens */}
         <div className="mt-12 flex w-full flex-col gap-y-4">
-          <ReseauLien href="https://barbofus.com/planning">
+          <ReseauLien interne href={`/${locale}/planning`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
