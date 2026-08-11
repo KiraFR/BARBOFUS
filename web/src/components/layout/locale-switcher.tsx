@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -31,14 +31,19 @@ const NOMS: Record<Locale, string> = {
 export function LocaleSwitcher({ locale }: { locale: Locale }) {
   const router = useRouter();
   const pathname = usePathname();
-  const parametres = useSearchParams();
   const [ouvert, setOuvert] = useState(false);
 
   function changer(cible: Locale) {
     // On remplace le préfixe de langue et rien d'autre.
     const chemin = pathname.replace(new RegExp(`^/${locale}`), `/${cible}`);
-    const requete = parametres.toString();
-    router.push(requete ? `${chemin}?${requete}` : chemin);
+
+    // La requête est lue au moment du clic plutôt que par `useSearchParams` :
+    // ce composant vit dans la mise en page racine, et `useSearchParams` y
+    // exigerait une frontière Suspense sur toutes les pages, y compris celles
+    // qui sont figées à la compilation.
+    const requete = window.location.search;
+
+    router.push(chemin + requete);
     setOuvert(false);
   }
 
