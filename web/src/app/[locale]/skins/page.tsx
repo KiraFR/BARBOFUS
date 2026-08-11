@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
 import { GalleryToolbar } from "@/components/skins/gallery-toolbar";
-import { SkinCard } from "@/components/skins/skin-card";
+import { InfiniteGrid } from "@/components/skins/infinite-grid";
+import { MissSkinPodium } from "@/components/skins/miss-skin-podium";
 import { SkinFilters } from "@/components/skins/skin-filters";
 import { estConnecte } from "@/lib/auth";
 import { filtrerSkins, lireFiltres } from "@/lib/filtres";
@@ -52,19 +53,30 @@ export default async function SkinsPage({
       <main className="w-full flex-1 py-6">
         <GalleryToolbar t={t} nombreDeSkins={liste.length} triCourant={tri} locale={locale} />
 
+        {/* Jusqu'à 1800 px, le podium s'intercale entre la barre et la grille ;
+            au-delà il devient la colonne de droite, plus bas. Il est rendu à
+            deux endroits et masqué en CSS — la copie cachée ne charge aucune
+            image, `display: none` suspendant le chargement différé. */}
+        <MissSkinPodium locale={locale} className="mt-10 min-[1801px]:hidden" />
+
         {liste.length === 0 ? (
           <p className="text-inactive mt-24 text-center italic">{t.filterNoResult}</p>
         ) : (
-          /* Colonnes de largeur fixe en auto-fill, reprises du site actuel :
-             les cartes gardent leurs proportions et c'est leur nombre par
-             ligne qui s'adapte, jamais leur taille. */
-          <div className="mx-auto grid w-[min(100%,93rem)] grid-cols-[repeat(auto-fill,13.125rem)] justify-center gap-x-8 gap-y-16 px-4 pt-[4.5rem]">
-            {liste.map((skin) => (
-              <SkinCard key={skin.id} skin={skin} locale={locale} connecte={connecte} />
-            ))}
-          </div>
+          /* La clé change dès qu'un filtre ou le tri bouge : la grille est
+             remontée à neuf et repart de la première tranche. */
+          <InfiniteGrid
+            key={JSON.stringify(requete)}
+            skins={liste}
+            locale={locale}
+            connecte={connecte}
+          />
         )}
       </main>
+
+      <MissSkinPodium
+        locale={locale}
+        className="border-ivory hidden shrink-0 border-l-2 px-6 py-10 min-[1801px]:block min-[1801px]:w-[25rem]"
+      />
     </div>
   );
 }

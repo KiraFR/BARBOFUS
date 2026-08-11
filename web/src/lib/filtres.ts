@@ -35,11 +35,14 @@ export const TYPES = [
 ] as const;
 
 /**
- * L'identifiant du compte de Barbe Douce, pour le filtre « voir uniquement ses
- * skins ». Inconnu tant que l'API ne l'expose pas : le filtre fonctionne, mais
- * ne renverra rien avant qu'on renseigne la bonne valeur.
+ * Le compte de Barbe Douce, pour le filtre « voir uniquement ses skins ».
+ *
+ * Reconnu par son PSEUDO et non par un identifiant : c'est ce que fait le site
+ * actuel, qui compare littéralement `users.name` à cette chaîne
+ * (InfiniteUnitySkinIndex.php, ligne 169). Ni configuration, ni variable
+ * d'environnement là-bas — on reproduit à l'identique.
  */
-export const ID_BARBE_DOUCE: number | null = null;
+export const PSEUDO_BARBE_DOUCE = "Barbe Douce";
 
 export const GENRES = [
   { valeur: 0, cle: "filterGenderMale" },
@@ -179,9 +182,7 @@ export function filtrerSkins(skins: SkinCardItem[], filtres: Filtres): SkinCardI
       return false;
     }
 
-    // Sans identifiant renseigné, ce filtre ne retient rien : c'est visible
-    // plutôt que silencieux, et ça se règle en remplissant ID_BARBE_DOUCE.
-    if (filtres.barbeDouce && skin.user.id !== ID_BARBE_DOUCE) {
+    if (filtres.barbeDouce && skin.user.name !== PSEUDO_BARBE_DOUCE) {
       return false;
     }
 
