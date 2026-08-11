@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { storageUrl } from "@/lib/assets";
+import { cn } from "@/lib/utils";
 import { lien, type Locale } from "@/messages";
 import type { SkinCardItem } from "@/types/api";
 
@@ -26,14 +27,27 @@ import type { SkinCardItem } from "@/types/api";
  * likes. L'endpoint `/api/skin/{id}` ne les rend pas ; leurs emplacements sont
  * réservés dans la mise en page et se rempliront quand l'API les fournira.
  */
-export function SkinCard({ skin, locale }: { skin: SkinCardItem; locale: Locale }) {
+export function SkinCard({
+  skin,
+  locale,
+  className,
+}: {
+  skin: SkinCardItem;
+  locale: Locale;
+  /**
+   * Pour changer la façon dont la carte est dimensionnée. La galerie s'en
+   * passe ; le carrousel de l'accueil s'en sert, ses cartes étant réglées par
+   * la hauteur disponible et non par une colonne de grille.
+   */
+  className?: string;
+}) {
   const classe = skin.breed.name;
   const description = classe ? `Skin Dofus ${classe}` : "Skin Dofus";
 
   return (
     // Hauteur fixe, reprise du site actuel (22,5 rem). La largeur vient de la
     // colonne de la grille, fixée à 13,125 rem : les cartes ne s'étirent pas.
-    <article className="relative h-90 shadow-sm">
+    <article className={cn("relative h-90 shadow-sm", className)}>
       {/* Le nom du skin, au-dessus de la carte. Souvent absent : la place
           reste alors vide, comme sur le site actuel. */}
       {skin.name ? (

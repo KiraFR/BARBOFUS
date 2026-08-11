@@ -25,6 +25,30 @@ export type Messages = (typeof messages)["fr"];
 
 export const messages = {
   fr: {
+    titleHome: "Barbofus, la galerie de skins dofus",
+    descriptionHome:
+      "Bienvenue sur le site, explore la galerie de skin, ou poste les tiens et deviens la miss'skin de Dofus !",
+    buttonSkinExplore: "Explorer un skin",
+    titleBarbe: "Découvre Barbe Douce",
+    descriptionBarbe: "Le Streameur à l'origine de ce site",
+    titleBarbeDetails: "Petite présentation rapide & efficace :",
+    descriptionBarbeDetails1: "Je suis partenaire",
+    descriptionBarbeDetails2: "En live chaque jour dès 7-8h sur :",
+    descriptionBarbeDetails3: "Contact Pro :",
+    titleUnity: "Et si on profitait des skins unity ?!",
+    descriptionUnity1:
+      "Avec une galerie de plus de <strong>:skinCount skins</strong> postés par <strong>:userCount joueurs</strong>, Barbofus te permet de trouver le meilleur skin Dofus pour ton personnage en jeu, ou de montrer à tout le monde tes propres créations !",
+    descriptionUnity2:
+      "Découvre toute la variété du monde des douzes, peu importe le sexe, la classe, les couleurs ou le choix d'items, tous les skins sont présentés pour le plus grand plaisir des joueurs.",
+    descriptionUnity3:
+      "Tu veux montrer à la commu' de Barbe que c'est toi le plus fashion ? Tous les mardis, le concours Miss'Skin choisira les 3 skins ayant reçu le plus de like dans la semaine, alors prépare ton meilleur outfit et impressionne le monde des douzes !",
+    descriptionUnity4:
+      "Féca, Osamodas, Enutrof, Sram, Xélor, Ecaflip, Eniripsa, Iop, Crâ, Sadida, Sacrieur, Pandawa, Roublard, Zobal, Steamer, Eliotrope, Huppermage, Ouginak, Forgelance, vous êtes tous bienvenu !",
+    descriptionUnity5:
+      "Désormais, partagez vos skins de la version 3.0 sous Unity de Dofus sur Barbofus !",
+    titleThanks: "Remerciements",
+    titleTranslation: "Traductions",
+
     filterTitle: "Affine ta recherche",
     filterSearchLabel: "Recherche un item ou un pseudo :",
     filterSearchPlaceholder: "Nom d'item ou pseudo",
@@ -111,6 +135,30 @@ export const messages = {
     errorPasswordMismatch: "Les deux mots de passe ne correspondent pas.",
   },
   en: {
+    titleHome: "Barbofus, the Dofus skins gallery",
+    descriptionHome:
+      "Welcome to the website! Explore the skin gallery, share your own, and become the Miss'skin of Dofus!",
+    buttonSkinExplore: "Explore the skins",
+    titleBarbe: "Discover Barbe Douce",
+    descriptionBarbe: "The streamer behind this site",
+    titleBarbeDetails: "A quick & effective introduction:",
+    descriptionBarbeDetails1: "I am a partner",
+    descriptionBarbeDetails2: "Live every day from 7-8 AM on:",
+    descriptionBarbeDetails3: "Professional contact:",
+    titleUnity: "What if we enjoyed Unity skins?!",
+    descriptionUnity1:
+      "With a gallery of over <strong>:skinCount skins</strong> posted by <strong>:userCount players</strong>, Barbofus allows you to find the best Dofus skin for your character in the game, or showcase your own creations to everyone!",
+    descriptionUnity2:
+      "Discover the full variety of the World of Twelve, regardless of gender, breed, colors, or item choices. All skins are presented for the greatest pleasure of the players.",
+    descriptionUnity3:
+      "Want to show the Barbofus community that you're the most fashionable? Every Tuesday, the Miss'Skin contest will choose the 3 skins that received the most likes during the week. So get your best outfit ready and impress the World of Twelve!",
+    descriptionUnity4:
+      "Feca, Osamodas, Enutrof, Sram, Xelor, Ecaflip, Eniripsa, Iop, Cra, Sadida, Sacrier, Pandawa, Rogue, Masqueraider, Foggernaut, Eliotrope, Huppermage, Ouginak, Forgelance, you are all welcome!",
+    descriptionUnity5:
+      "From now on, share your skins from the Dofus 3.0 Unity version on Barbofus!",
+    titleThanks: "Acknowledgements",
+    titleTranslation: "Translations",
+
     filterTitle: "Refine your search",
     filterSearchLabel: "Search an item or a username:",
     filterSearchPlaceholder: "Item name or username",
@@ -194,6 +242,29 @@ export const messages = {
     errorPasswordMismatch: "The two passwords do not match.",
   },
   es: {
+    titleHome: "Barbofus, la galería de skins de Dofus",
+    descriptionHome:
+      "¡Bienvenido al sitio! Explora la galería de skins, comparte tus creaciones y ¡gana el premio Miss'Skin de Dofus!",
+    buttonSkinExplore: "Explorar skins",
+    titleBarbe: "Conoce a Barbe Douce",
+    descriptionBarbe: "El streamer detrás de este sitio",
+    titleBarbeDetails: "Una rápida presentación:",
+    descriptionBarbeDetails1: "Tengo partner en",
+    descriptionBarbeDetails2: "En vivo todos los días de 7-8 AM en:",
+    descriptionBarbeDetails3: "Contacto profesional:",
+    titleUnity: "¡¿Y si le sacamos provecho a las skins de Unity?!",
+    descriptionUnity1:
+      "Con una galería de más de <strong>:skinCount skins</strong> publicadas por <strong>:userCount jugadores</strong>, ¡Barbofus te permite encontrar la mejor skin de Dofus para tu personaje en el juego, o compartir tus creaciones con todo el mundo!",
+    descriptionUnity2:
+      "Descubre toda la variedad del Mundo de los Doce, sin importar género, clase, color u objetos. Todas las skins son presentadas para el mayor disfrute de los jugadores.",
+    descriptionUnity3:
+      "¿Quieres mostrarle a la comunidad de Barbofus que tienes el mejor estilo? Todos los martes, el concurso Miss'Skin elegirá a las 3 skins que más likes hayan recibido durante la semana. ¡Ten listo tu mejor outfit e impresiona al Mundo de los Doce!",
+    descriptionUnity4:
+      "Feca, Osamodas, Anutrof, Sram, Xelor, Zurcarak, Aniripsa, Yopuka, Ocra, Sadida, Sacrogrito, Pandawa, Tymador, Zobal, Steamer, Selotrop, Hipermago, Uginak, Forjalanza, ¡son todos bienvenidos!",
+    descriptionUnity5: "De ahora en adelante, ¡comparte tus skins de Dofus 3.0 en Barbofus!",
+    titleThanks: "Agradecimientos",
+    titleTranslation: "Traducciones",
+
     filterTitle: "Afina tu búsqueda",
     filterSearchLabel: "Busca un objeto o un usuario:",
     filterSearchPlaceholder: "Nombre de objeto o usuario",
@@ -279,6 +350,30 @@ export const messages = {
     errorPasswordMismatch: "Las dos contraseñas no coinciden.",
   },
   pt: {
+    titleHome: "Barbofus, a galeria de aparências do Dofus",
+    descriptionHome:
+      "Boas vindas ao site! Explore a galeria de aparências, compartilhe suas próprias criações e torne-se Miss'Aparência do Dofus!",
+    buttonSkinExplore: "Explore as aparências",
+    titleBarbe: "Descubra Barbe Douce",
+    descriptionBarbe: "O streamer por trás deste site",
+    titleBarbeDetails: "Uma introdução rápida e efetiva:",
+    descriptionBarbeDetails1: "Eu sou um parceiro",
+    descriptionBarbeDetails2: "Live todos os dias à partir das 7-8 AM na:",
+    descriptionBarbeDetails3: "Contato profissional:",
+    titleUnity: "E se nós gostamos das aparências do unity?!",
+    descriptionUnity1:
+      "Com uma galeria com mais de <strong>:skinCount skins</strong> postadas por <strong>:userCount players</strong>, Barbofus permite que você encontre a melhor aparência para seu personagem ou mostre suas próprias criações para todos verem!",
+    descriptionUnity2:
+      "Descubra toda a variedade do Mundo dos Doze, independente de gêneros, classes, cores ou escolha de itens. Todas as aparências são apresentadas para o maior prazer dos jogadores.",
+    descriptionUnity3:
+      "Quer mostrar para toda a comunidade do Barbofus que você é quem tem mais elegância? Toda Terça-feira o concurso Miss'Aparência do Dofus vai escolher as 3 aparências que receberam mais curtidas durante a semana. Então prepare seu melhor traje e impressione o Mundo dos Doze!",
+    descriptionUnity4:
+      "Feca, Osamodas, Enutrof, Sram, Xelor, Ecaflip, Eniripsa, Iop, Cra, Sadida, Sacrier, Pandawa, Ladino, Zobal, Steamer, Eliotrope, Huppermago, Kilorf, Forjalanca, todos são bem vindos!",
+    descriptionUnity5:
+      "Daqui adiante compartilhe suas aparências da versão Unity do Dofus 3.0 no Barbofus!",
+    titleThanks: "Agradecimentos",
+    titleTranslation: "Traduções",
+
     filterTitle: "Refine sua busca",
     filterSearchLabel: "Busque um item ou um usuário:",
     filterSearchPlaceholder: "Nome do item ou usuário",

@@ -40,4 +40,80 @@ export const images = {
   tofu: `${BASE}/tofu.webp`,
   champchamp: `${BASE}/champchamp.webp`,
   wabbit: `${BASE}/wabbit.webp`,
+  portrait: `${BASE}/portrait.avif`,
 } as const;
+
+/** Les réseaux de Barbe Douce, dans l'ordre du site. */
+export const reseaux = [
+  {
+    nom: "TikTok",
+    url: "https://www.tiktok.com/@barbe___douce",
+    logo: `${BASE}/Logo_TikTok.png`,
+  },
+  {
+    nom: "Instagram",
+    url: "https://www.instagram.com/barbe.douce.twitch/",
+    logo: `${BASE}/Logo_Instagram.webp`,
+  },
+  {
+    nom: "Twitter",
+    url: "https://twitter.com/DouceBarbe",
+    logo: `${BASE}/logo-twitter-x.webp`,
+  },
+  {
+    nom: "Youtube",
+    url: "https://www.youtube.com/channel/UCJIBwLWxtdrVCwuX-F3W9bA?view_as=subscriber",
+    logo: `${BASE}/Logo_Youtube.png`,
+  },
+  {
+    nom: "Twitch",
+    url: "https://www.twitch.tv/barbe___douce",
+    logo: `${BASE}/Logo_Twitch.png`,
+  },
+  {
+    nom: "Discord",
+    url: "https://discord.gg/YKHc4RD",
+    logo: `${BASE}/Logo_Discord.png`,
+  },
+] as const;
+
+/**
+ * Les traducteurs bénévoles du site.
+ *
+ * Leurs drapeaux viennent de `static.barbofus.com`, un second domaine qui sert
+ * aussi des ressources — à ne pas confondre avec `/storage`.
+ */
+export const traducteurs = [
+  {
+    nom: "Max Medina",
+    role: "Traductions es",
+    drapeau: "https://static.barbofus.com/images/icons/locale/es.png",
+  },
+  {
+    nom: "Amalik",
+    role: "Traduction pt/br",
+    drapeau: "https://static.barbofus.com/images/icons/locale/pt.png",
+  },
+] as const;
+
+/** Les sites remerciés en bas de la page d'accueil. */
+export const partenaires = [
+  {
+    nom: "DofusDB",
+    role: "API des Items",
+    url: "https://dofusdb.fr/fr/",
+    logo: `${BASE}/logo-dofus-db.ico`,
+  },
+  {
+    nom: "DofusRoom",
+    role: "Builder & outils",
+    url: "https://www.dofusroom.com/",
+    logo: `${BASE}/dofusroom.png`,
+  },
+  {
+    nom: "DofusBook",
+    role: "Builder & outils",
+    url: "https://dofusbook.net/fr/",
+    logo: `${BASE}/dofusbook.ico`,
+  },
+] as const;
